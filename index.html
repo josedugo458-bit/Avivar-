@@ -851,6 +851,13 @@ a:hover{color:var(--text-link-hover);border-bottom-color:var(--text-link-hover)}
   a{color:var(--text-link);text-decoration:none;}
   a:hover{color:var(--text-link-hover);}
   @media (prefers-reduced-motion:reduce){*{transition-duration:1ms !important;}}
+  section[id]{scroll-margin-top:72px;}
+  .av-menu-btn,.av-menu-movil{display:none;}
+  @media (max-width:760px){
+    .av-nav{display:none !important;}
+    .av-menu-btn{display:inline-flex;}
+    .av-menu-movil{display:block;}
+  }
 </style>
 </helmet>
 
@@ -862,14 +869,29 @@ a:hover{color:var(--text-link-hover);border-bottom-color:var(--text-link-hover)}
         <img src="assets/img/logo.png" alt="" style="height:38px;width:auto;display:block">
         <span style="font-family:var(--font-display,'Newsreader',Georgia,serif);font-size:26px;line-height:1;letter-spacing:-.015em;color:var(--carbon-900)">avivar</span>
       </a>
-      <nav style="display:flex;align-items:center;gap:28px;font-size:15px">
+      <nav class="av-nav" style="display:flex;align-items:center;gap:28px;font-size:15px">
         <a href="#formulas" style="color:var(--carbon-800)">Fórmulas</a>
         <a href="#ciencia" style="color:var(--carbon-800)">Ciencia</a>
         <a href="#planes" style="color:var(--carbon-800)">Planes</a>
         <a href="#nosotras" style="color:var(--carbon-800)">Nosotras</a>
         <x-import component-from-global-scope="VestaDesignSystem_e6d2b4.Button" size="sm" hint-size="140px,36px">Ver las fórmulas</x-import>
       </nav>
+      <button type="button" class="av-menu-btn" sc-camel-on-click="{{ toggleMenu }}" aria-expanded="{{ menuAbierto }}" aria-controls="menu-movil" aria-label="{{ menuLabel }}" style="align-items:center;justify-content:center;width:44px;height:44px;margin-right:-10px;padding:0;background:none;border:none;border-radius:8px;cursor:pointer;color:var(--carbon-900)" style-hover="color:var(--ember-600)">
+        <sc-if value="{{ menuCerrado }}" hint-placeholder-val="{{ true }}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></sc-if>
+        <sc-if value="{{ menuAbierto }}" hint-placeholder-val="{{ false }}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></sc-if>
+      </button>
     </div>
+    <sc-if value="{{ menuAbierto }}" hint-placeholder-val="{{ false }}">
+      <nav id="menu-movil" class="av-menu-movil" aria-label="Menú principal" style="border-top:1px solid var(--sand-300);padding:8px 24px 24px">
+        <a href="#formulas" sc-camel-on-click="{{ cerrarMenu }}" style="display:block;padding:14px 0;border-bottom:1px solid var(--sand-300);font-size:18px;color:var(--carbon-800)">Fórmulas</a>
+        <a href="#ciencia" sc-camel-on-click="{{ cerrarMenu }}" style="display:block;padding:14px 0;border-bottom:1px solid var(--sand-300);font-size:18px;color:var(--carbon-800)">Ciencia</a>
+        <a href="#planes" sc-camel-on-click="{{ cerrarMenu }}" style="display:block;padding:14px 0;border-bottom:1px solid var(--sand-300);font-size:18px;color:var(--carbon-800)">Planes</a>
+        <a href="#nosotras" sc-camel-on-click="{{ cerrarMenu }}" style="display:block;padding:14px 0;border-bottom:1px solid var(--sand-300);font-size:18px;color:var(--carbon-800)">Nosotras</a>
+        <div style="padding-top:20px">
+          <x-import component-from-global-scope="VestaDesignSystem_e6d2b4.Button" as="a" href="#formulas" full="{{ true }}" sc-camel-on-click="{{ cerrarMenu }}" hint-size="100%,44px">Ver las fórmulas</x-import>
+        </div>
+      </nav>
+    </sc-if>
   </header>
 
   <section id="inicio" style="background:var(--ember-500);color:var(--sand-50);border-bottom:1px solid var(--ember-700)">
@@ -1111,9 +1133,13 @@ a:hover{color:var(--text-link-hover);border-bottom-color:var(--text-link-hover)}
 <script>(function(){var r=window.__resources;if(!r)return;var m={plus:r.icPlus,minus:r.icMinus,play:r.icPlay};new MutationObserver(function(){document.querySelectorAll("[style*='lucide-static']").forEach(function(el){["maskImage","webkitMaskImage"].forEach(function(p){var v=el.style[p];if(!v)return;var k=(v.match(/icons\/([a-z-]+)\.svg/)||[])[1];if(k&&m[k])el.style[p]="url("+m[k]+")";});});}).observe(document.documentElement,{subtree:true,childList:true,attributes:true,attributeFilter:["style"]});})();</script>
 <script type="text/x-dc" data-dc-script="" data-props="{&quot;mostrarBarraConfianza&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Contenido&quot;},&quot;faqInicial&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:0,&quot;min&quot;:-1,&quot;max&quot;:4,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Contenido&quot;},&quot;videoSrc&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;assets/video/avivar.mp4&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Video&quot;}}">
 class Component extends DCLogic {
-  state = { faqAbierta: null, videoOk: null, heroFallo: false };
+  state = { faqAbierta: null, videoOk: null, heroFallo: false, menuAbierto: false };
+  toggleMenu = () => this.setState((s) => ({ menuAbierto: !s.menuAbierto }));
+  cerrarMenu = () => this.setState({ menuAbierto: false });
+  cerrarConEscape = (e) => { if (e.key === "Escape" && this.state.menuAbierto) this.cerrarMenu(); };
   handleHeroError = () => this.setState({ heroFallo: true });
-  componentDidMount() { this.probarVideo(); }
+  componentDidMount() { this.probarVideo(); document.addEventListener("keydown", this.cerrarConEscape); }
+  componentWillUnmount() { document.removeEventListener("keydown", this.cerrarConEscape); }
   componentDidUpdate(prev) { if (prev.videoSrc !== this.props.videoSrc) this.probarVideo(); }
   probarVideo() {
     const src = this.props.videoSrc ?? ((window.__resources||{}).heroVideo || "assets/video/avivar.mp4");
@@ -1136,6 +1162,11 @@ class Component extends DCLogic {
     ];
     return {
       videoRef: this.videoRef || (this.videoRef = (el) => { if (!el) return; el.muted = true; el.defaultMuted = true; el.setAttribute("muted", ""); if (!el.__avErr) { el.__avErr = true; el.addEventListener("error", () => { if (el.closest("#inicio")) this.handleHeroError(); }, true); if (el.error && el.closest("#inicio")) this.handleHeroError(); } const p = el.play(); if (p && p.catch) p.catch(() => {}); }),
+      menuAbierto: this.state.menuAbierto,
+      menuCerrado: !this.state.menuAbierto,
+      menuLabel: this.state.menuAbierto ? "Cerrar menú" : "Abrir menú",
+      toggleMenu: this.toggleMenu,
+      cerrarMenu: this.cerrarMenu,
       heroFallo: this.state.heroFallo,
       heroOk: !this.state.heroFallo,
       onHeroError: this.handleHeroError,
