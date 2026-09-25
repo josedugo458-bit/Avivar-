@@ -911,14 +911,14 @@ a:hover{color:var(--text-link-hover);border-bottom-color:var(--text-link-hover)}
     </section>
   </sc-if>
 
-  <section id="video" style="position:relative;background:var(--carbon-900);aspect-ratio:16/7;min-height:360px;overflow:hidden">
+  <section id="video" style="position:relative;width:100%;background:var(--carbon-900);aspect-ratio:16/7;min-height:360px;overflow:hidden">
     <sc-if value="{{ hayVideo }}" hint-placeholder-val="{{ false }}">
       <video ref="{{ videoRef }}" src="{{ videoSrc }}" sc-camel-auto-play="{{ true }}" muted="{{ true }}" loop="{{ true }}" sc-camel-plays-inline="{{ true }}" preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"></video>
     </sc-if>
     <sc-if value="{{ sinVideo }}" hint-placeholder-val="{{ true }}">
       <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:12px;padding:56px 24px 24px;text-align:center;color:var(--sand-200);border:1px dashed var(--carbon-700)">
         <x-import component-from-global-scope="VestaDesignSystem_e6d2b4.Icon" name="play" size="{{ 24 }}" color="var(--sand-200)" hint-size="24px,24px"></x-import>
-        <div style="font-size:15px;max-width:52ch">Video en loop · sube tu archivo .mp4 a <strong style="font-weight:500;color:var(--sand-50)">uploads/avivar.mp4</strong> o cambia la ruta en Tweaks</div>
+        <div style="font-size:15px;max-width:52ch">Video en loop · sube tu archivo .mp4 a <strong style="font-weight:500;color:var(--sand-50)">assets/video/avivar.mp4</strong> o cambia la ruta en Tweaks</div>
         <div style="font-size:13px;color:var(--sand-400)">Sin sonido · 10-20 s · luz natural cálida · 1920×840 o mayor</div>
       </div>
     </sc-if>
@@ -1109,14 +1109,14 @@ a:hover{color:var(--text-link-hover);border-bottom-color:var(--text-link-hover)}
 </x-dc>
 
 <script>(function(){var r=window.__resources;if(!r)return;var m={plus:r.icPlus,minus:r.icMinus,play:r.icPlay};new MutationObserver(function(){document.querySelectorAll("[style*='lucide-static']").forEach(function(el){["maskImage","webkitMaskImage"].forEach(function(p){var v=el.style[p];if(!v)return;var k=(v.match(/icons\/([a-z-]+)\.svg/)||[])[1];if(k&&m[k])el.style[p]="url("+m[k]+")";});});}).observe(document.documentElement,{subtree:true,childList:true,attributes:true,attributeFilter:["style"]});})();</script>
-<script type="text/x-dc" data-dc-script="" data-props="{&quot;mostrarBarraConfianza&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Contenido&quot;},&quot;faqInicial&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:0,&quot;min&quot;:-1,&quot;max&quot;:4,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Contenido&quot;},&quot;videoSrc&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;uploads/avivar.mp4&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Video&quot;}}">
+<script type="text/x-dc" data-dc-script="" data-props="{&quot;mostrarBarraConfianza&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Contenido&quot;},&quot;faqInicial&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:0,&quot;min&quot;:-1,&quot;max&quot;:4,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Contenido&quot;},&quot;videoSrc&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;assets/video/avivar.mp4&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Video&quot;}}">
 class Component extends DCLogic {
   state = { faqAbierta: null, videoOk: null, heroFallo: false };
   handleHeroError = () => this.setState({ heroFallo: true });
   componentDidMount() { this.probarVideo(); }
   componentDidUpdate(prev) { if (prev.videoSrc !== this.props.videoSrc) this.probarVideo(); }
   probarVideo() {
-    const src = this.props.videoSrc ?? ((window.__resources||{}).heroVideo || "uploads/avivar.mp4");
+    const src = this.props.videoSrc ?? ((window.__resources||{}).heroVideo || "assets/video/avivar.mp4");
     const v = document.createElement("video");
     v.preload = "metadata";
     v.onloadedmetadata = () => this.setState({ videoOk: true });
@@ -1139,9 +1139,9 @@ class Component extends DCLogic {
       heroFallo: this.state.heroFallo,
       heroOk: !this.state.heroFallo,
       onHeroError: this.handleHeroError,
-      heroSrc: ((window.__resources||{}).heroVideo || "uploads/avivar.mp4"),
+      heroSrc: ((window.__resources||{}).heroVideo || "assets/video/avivar.mp4"),
       mostrarBarraConfianza: this.props.mostrarBarraConfianza ?? true,
-      videoSrc: this.state.videoOk === false ? "" : (this.props.videoSrc ?? ((window.__resources||{}).heroVideo || "uploads/avivar.mp4")),
+      videoSrc: this.state.videoOk === false ? "" : (this.props.videoSrc ?? ((window.__resources||{}).heroVideo || "assets/video/avivar.mp4")),
       hayVideo: this.state.videoOk === true,
       sinVideo: this.state.videoOk !== true,
       formulas: [
