@@ -872,7 +872,7 @@ a:hover{color:var(--text-link-hover);border-bottom-color:var(--text-link-hover)}
       <nav class="av-nav" style="display:flex;align-items:center;gap:28px;font-size:15px">
         <a href="#ciencia" style="color:var(--carbon-800)">Ciencia</a>
         <a href="#suscripciones" style="color:var(--carbon-800)">Suscripciones</a>
-        <a href="#nuestra historia" style="color:var(--carbon-800)">Nuestra historia</a>
+        <a href="#nuestra-historia" style="color:var(--carbon-800)">Nuestra historia</a>
         <x-import component-from-global-scope="VestaDesignSystem_e6d2b4.Button" size="sm" hint-size="140px,36px">COMPRAR</x-import>
       </nav>
       <button type="button" class="av-menu-btn" sc-camel-on-click="{{ toggleMenu }}" aria-expanded="{{ menuAbierto }}" aria-controls="menu-movil" aria-label="{{ menuLabel }}" style="align-items:center;justify-content:center;width:44px;height:44px;margin-right:-10px;padding:0;background:none;border:none;border-radius:8px;cursor:pointer;color:var(--carbon-900)" style-hover="color:var(--ember-600)">
@@ -883,8 +883,8 @@ a:hover{color:var(--text-link-hover);border-bottom-color:var(--text-link-hover)}
     <sc-if value="{{ menuAbierto }}" hint-placeholder-val="{{ false }}">
       <nav id="menu-movil" class="av-menu-movil" aria-label="Menú principal" style="border-top:1px solid var(--sand-300);padding:8px 24px 24px">
         <a href="#ciencia" sc-camel-on-click="{{ cerrarMenu }}" style="display:block;padding:14px 0;border-bottom:1px solid var(--sand-300);font-size:18px;color:var(--carbon-800)">Ciencia</a>
-        <a href="#suscripciones" sc-camel-on-click="{{ cerrarMenu }}" style="display:block;padding:14px 0;border-bottom:1px solid var(--sand-300);font-size:18px;color:var(--carbon-800)">suscripciones</a>
-        <a href="#nuestra historia" sc-camel-on-click="{{ cerrarMenu }}" style="display:block;padding:14px 0;border-bottom:1px solid var(--sand-300);font-size:18px;color:var(--carbon-800)">Nuestra historia</a>
+        <a href="#suscripciones" sc-camel-on-click="{{ cerrarMenu }}" style="display:block;padding:14px 0;border-bottom:1px solid var(--sand-300);font-size:18px;color:var(--carbon-800)">Suscripciones</a>
+        <a href="#nuestra-historia" sc-camel-on-click="{{ cerrarMenu }}" style="display:block;padding:14px 0;border-bottom:1px solid var(--sand-300);font-size:18px;color:var(--carbon-800)">Nuestra historia</a>
         <div style="padding-top:20px">
           <x-import component-from-global-scope="VestaDesignSystem_e6d2b4.Button" as="a" href="#formulas" full="{{ true }}" sc-camel-on-click="{{ cerrarMenu }}" hint-size="100%,44px">COMPRAR</x-import>
         </div>
@@ -1018,7 +1018,7 @@ a:hover{color:var(--text-link-hover);border-bottom-color:var(--text-link-hover)}
     </div>
   </section>
 
-  <section id="planes" style="background:var(--sand-50);border-top:1px solid var(--sand-300);border-bottom:1px solid var(--sand-300)">
+  <section id="suscripciones" style="background:var(--sand-50);border-top:1px solid var(--sand-300);border-bottom:1px solid var(--sand-300)">
     <div style="max-width:1240px;margin:0 auto;padding:96px 24px">
       <div style="max-width:680px;margin-bottom:56px">
         <div style="font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:.14em;color:var(--carbon-600);margin-bottom:14px">Precios y suscripción</div>
@@ -1073,10 +1073,10 @@ a:hover{color:var(--text-link-hover);border-bottom-color:var(--text-link-hover)}
     </div>
   </section>
 
-  <section id="nuestra historia" style="background:var(--ember-500);color:var(--sand-50)">
+  <section id="nuestra-historia" style="background:var(--ember-500);color:var(--sand-50)">
     <div style="max-width:1240px;margin:0 auto;padding:96px 24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:64px;align-items:center">
       <div style="position:relative;min-height:420px">
-        <image-slot id="nuestra historia-equipo" shape="rect" fit="cover" placeholder="Manos y textura · producto sobre barro o madera · luz natural cálida · recorte 4/3"></image-slot>
+        <image-slot id="nuestra-historia-equipo" shape="rect" fit="cover" placeholder="Manos y textura · producto sobre barro o madera · luz natural cálida · recorte 4/3"></image-slot>
       </div>
       <div>
         <div style="font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:.14em;color:var(--sand-100);margin-bottom:14px">Nuestra historia</div>
@@ -1101,14 +1101,14 @@ a:hover{color:var(--text-link-hover);border-bottom-color:var(--text-link-hover)}
           <a href="#formulas" style="color:var(--sand-100)">Noche</a>
           <a href="#formulas" style="color:var(--sand-100)">Termorregulación</a>
           <a href="#formulas" style="color:var(--sand-100)">Base diaria</a>
-          <a href="#planes" style="color:var(--sand-100)">Planes y suscripción</a>
+          <a href="#suscripciones" style="color:var(--sand-100)">Planes y suscripción</a>
         </div>
       </div>
       <div>
         <div style="font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:.14em;color:var(--gold-400);margin-bottom:18px">Avivar</div>
         <div style="display:flex;flex-direction:column;gap:10px;font-size:15px">
           <a href="#ciencia" style="color:var(--sand-100)">Respaldo científico</a>
-          <a href="#nuestra historia" style="color:var(--sand-100)">Nuestra historia</a>
+          <a href="#nuestra-historia" style="color:var(--sand-100)">Nuestra historia</a>
           <a href="#" style="color:var(--sand-100)">Envíos y devoluciones</a>
           <a href="mailto:hola@avivar.co" style="color:var(--sand-100)">hola@avivar.co</a>
         </div>
