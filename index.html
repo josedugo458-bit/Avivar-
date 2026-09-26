@@ -1,1208 +1,470 @@
-8<!DOCTYPE html>
-<html lang="es"><head>
-<title>Avivar</title>
+<!DOCTYPE html>
+<html lang="es">
+<head>
 <meta charset="utf-8">
-<script>window.__resources = {
-  "icPlay": "assets/icons/play.svg",
-  "icMinus": "assets/icons/minus.svg",
-  "icPlus": "assets/icons/plus.svg",
-  "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "assets/vendor/react.production.min.js",
-  "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "assets/vendor/react-dom.production.min.js"
-};</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="assets/js/dc-runtime.js"></script>
+<title>Avivar · El fuego que se cuida, no se apaga</title>
+<meta name="description" content="Gomas formuladas con ciencia para la transición hormonal: menos calores y sofocos, con la dosis de los estudios y cada miligramo declarado en la etiqueta. Envío gratis a toda Colombia.">
+<meta name="theme-color" content="#FAF5EF">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Avivar · El fuego que se cuida, no se apaga">
+<meta property="og:description" content="Gomas formuladas con ciencia para la transición hormonal. Envío gratis a toda Colombia.">
+<meta property="og:image" content="https://avivar.com.co/assets/img/video-poster.jpg">
+<meta property="og:url" content="https://avivar.com.co/">
+<link rel="icon" type="image/png" href="assets/img/logo.png">
+<link rel="preload" href="assets/fonts/newsreader-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/instrument-sans-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:'Newsreader';font-style:normal;font-weight:300 600;font-display:swap;src:url(assets/fonts/newsreader-normal-latin.woff2) format('woff2')}
+@font-face{font-family:'Newsreader';font-style:italic;font-weight:300 600;font-display:swap;src:url(assets/fonts/newsreader-italic-latin.woff2) format('woff2')}
+@font-face{font-family:'Instrument Sans';font-style:normal;font-weight:400 700;font-display:swap;src:url(assets/fonts/instrument-sans-normal-latin.woff2) format('woff2')}
+:root{
+  --ember-50:#FBEEE7;--ember-100:#F5DACB;--ember-400:#D0754F;--ember-500:#C1502E;--ember-600:#AA4527;
+  --gold-100:#F2E6D2;--gold-300:#D2B27F;--gold-400:#B98B4E;
+  --sand-50:#FAF5EF;--sand-100:#F3E9DE;--sand-200:#EADCCD;--sand-300:#DCC9B6;
+  --carbon-600:#6E625A;--carbon-700:#564A43;--carbon-800:#3D332E;--carbon-900:#2B2320;
+  --serif:'Newsreader',Georgia,serif;--sans:'Instrument Sans',system-ui,-apple-system,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--sand-50);color:var(--carbon-900);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+img,video{display:block;max-width:100%}
+:focus-visible{outline:2px solid var(--ember-500);outline-offset:3px}
+.wrap{max-width:1200px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:-.015em;margin:0}
+h2{font-size:clamp(32px,5vw,48px);line-height:1.08;text-align:center}
+h1 em,h2 em{font-style:italic;font-weight:400;color:var(--ember-500)}
+.lead{font-family:var(--serif);font-size:clamp(19px,2.2vw,22px);line-height:1.4;color:var(--carbon-700);text-align:center;max-width:34ch;margin:16px auto 0}
+.eyebrow{display:block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--ember-600);margin-bottom:12px}
+.pill{display:flex;align-items:center;justify-content:center;width:100%;max-width:440px;margin:0 auto;min-height:60px;padding:0 24px;border-radius:999px;background:var(--ember-500);color:#fff;font-weight:600;font-size:18px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;text-align:center;border:0;cursor:pointer}
+.pill:hover{background:var(--ember-600);color:#fff}
+section{padding:64px 0;scroll-margin-top:64px}
+
+/* Barra de promoción */
+.promo{background:var(--ember-500);color:#fff;text-align:center;font-size:14px;line-height:1.35;padding:10px 16px}
+.promo b,.promo a{font-weight:700}
+.promo a{text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+
+/* Encabezado */
+header{position:sticky;top:0;z-index:20;background:rgba(250,245,239,.94);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-bottom:1px solid var(--sand-200)}
+.hdr{display:grid;grid-template-columns:44px 1fr 44px;align-items:center;height:64px}
+.logo{display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;font-family:var(--serif);font-size:28px;line-height:1;color:var(--carbon-900)}
+.logo img{height:36px;width:auto}
+.burger,.bag{width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:none;border:0;color:var(--carbon-900);padding:0;cursor:pointer;text-decoration:none}
+.bag-txt,.nav{display:none}
+.menu{border-top:1px solid var(--sand-200);padding:4px 20px 24px}
+.menu[hidden]{display:none}
+.menu a{display:block;padding:14px 0;border-bottom:1px solid var(--sand-200);font-size:18px;text-decoration:none}
+.menu .pill{margin-top:20px;border:0;min-height:52px;font-size:15px}
+@media (min-width:900px){
+  .hdr{grid-template-columns:auto 1fr auto;gap:40px}
+  .burger,.menu{display:none!important}
+  .logo{justify-content:flex-start}
+  .nav{display:flex;gap:32px;justify-content:center;font-size:15px}
+  .nav a{text-decoration:none}
+  .nav a:hover{color:var(--ember-600)}
+  .bag{width:auto;height:40px;padding:0 20px;border-radius:999px;background:var(--ember-500);color:#fff;font-weight:600;font-size:13px;letter-spacing:.06em;text-transform:uppercase}
+  .bag:hover{background:var(--ember-600)}
+  .bag svg{display:none}.bag-txt{display:inline}
+}
+
+/* Portada */
+.hero{background:linear-gradient(180deg,var(--sand-50) 0%,var(--ember-50) 55%,var(--ember-100) 100%);padding:44px 0 0;text-align:center;overflow:hidden}
+.hero .eyebrow{margin-bottom:16px}
+.hero h1{font-size:clamp(44px,8vw,84px);line-height:1}
+.hero h1 span{display:block;font-weight:600}
+.hero h1 em{display:block;font-size:1.05em;color:var(--carbon-900)}
+.hero p{max-width:40ch;margin:18px auto 26px;color:var(--carbon-700);font-size:17px}
+.chips{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:22px}
+.chip{background:#fff;border:1px solid var(--sand-300);border-radius:999px;padding:7px 14px;font-size:13px;color:var(--carbon-800)}
+.chip b{color:var(--ember-600)}
+.hero-media{margin:36px auto 0;max-width:760px;aspect-ratio:1/1;max-height:560px;border-radius:28px 28px 0 0;overflow:hidden;background:#000}
+.hero-media video{width:100%;height:100%;object-fit:cover}
+
+/* ¿Cómo te ayudamos? */
+.needs{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:36px}
+.need{position:relative;border-radius:18px;overflow:hidden;color:#fff;text-decoration:none;display:flex;flex-direction:column;padding:18px;box-shadow:0 10px 24px -14px rgba(43,35,32,.45)}
+.need:hover{color:#fff}
+.need small{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;opacity:.85}
+.need strong{font-family:var(--serif);font-weight:500;font-size:clamp(22px,3vw,30px);line-height:1.05;margin:6px 0 16px}
+.need .arrow{font-family:var(--sans);font-weight:400}
+.need img{margin:auto auto -18px;width:82%;aspect-ratio:1/1;object-fit:cover;border-radius:14px 14px 0 0;box-shadow:0 -8px 30px rgba(0,0,0,.25);transition:transform .3s}
+.need:hover img{transform:translateY(-4px)}
+.n1{background:linear-gradient(160deg,var(--ember-400),var(--ember-600))}
+.n2{background:linear-gradient(160deg,#4A3A33,var(--carbon-900))}
+.n3{background:linear-gradient(160deg,var(--gold-300),var(--gold-400))}
+.need-wide{grid-column:1/-1;flex-direction:row;align-items:flex-start;gap:12px;min-height:190px}
+.need-wide .t{display:flex;flex-direction:column;flex:1}
+.need-wide img{width:46%;margin:0 0 -18px;align-self:flex-end}
+@media (min-width:900px){
+  .needs{grid-template-columns:repeat(3,1fr);gap:22px}
+  .need-wide{grid-column:auto;flex-direction:column}
+  .need-wide img{width:82%;margin:auto auto -18px;align-self:auto}
+}
+.after{margin-top:32px}
+
+/* Franja de video */
+.band{position:relative;height:clamp(300px,44vw,520px);background:#000;overflow:hidden;padding:0}
+.band video{width:100%;height:100%;object-fit:cover;opacity:.9}
+.band .cap{position:absolute;inset:auto 0 0 0;padding:28px 20px;background:linear-gradient(to top,rgba(43,35,32,.85),transparent);color:var(--sand-50)}
+.band .cap p{font-family:var(--serif);font-size:clamp(28px,4vw,42px);line-height:1.15;max-width:1200px;margin:0 auto}
+
+/* Formulación basada en ciencia */
+.science{padding-top:0}
+.science-photo{position:relative;height:clamp(260px,50vw,480px);background:var(--sand-200);border-bottom:1px solid var(--sand-300)}
+/* La foto se recorta arriba para que no se vea la etiqueta del frasco */
+.science-photo>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 15%}
+@media (min-width:1300px){.science-photo{max-width:1200px;margin:0 auto;background:none;border:0}.science-photo>img{border-radius:0 0 24px 24px}}
+.science-dot{position:absolute;right:20px;bottom:-56px;width:120px;height:120px;border-radius:50%;overflow:hidden;box-shadow:0 12px 30px -10px rgba(43,35,32,.5);border:4px solid var(--sand-50)}
+.science-dot img{width:100%;height:100%;object-fit:cover}
+.science .wrap{padding-top:56px}
+.science h2{text-align:left;max-width:16ch}
+.science .lead{text-align:left;margin-left:0}
+.stats{display:grid;gap:14px;margin-top:32px}
+.stat{display:grid;grid-template-columns:minmax(0,118px) minmax(0,1fr);gap:16px;align-items:center;background:var(--sand-100);border-radius:16px;padding:22px 20px}
+.stat .num{font-family:var(--serif);font-style:italic;color:var(--ember-500);font-size:clamp(38px,12vw,46px);line-height:.95;text-align:center}
+.stat .num small{display:block;font-size:22px}
+.stat h3{font-family:var(--sans);font-weight:700;font-size:19px;letter-spacing:0}
+.stat p{margin:4px 0 0;font-size:15px;color:var(--carbon-700);line-height:1.4}
+.stat .src{display:block;margin-top:6px;font-size:12px;color:var(--carbon-600)}
+@media (min-width:900px){
+  .stats{grid-template-columns:repeat(3,1fr)}
+  .stat{grid-template-columns:1fr}
+  .stat .num{text-align:left}
+}
+
+/* Nuestras fórmulas */
+.products-sec{background:#fff}
+.products{display:grid;grid-template-columns:1fr;gap:14px;margin-top:32px}
+.prod{background:#fff;border-radius:16px;overflow:hidden;display:flex;flex-direction:column;border:1px solid var(--sand-200)}
+.prod-img{position:relative;background:var(--sand-100);aspect-ratio:1/1;overflow:hidden}
+.prod-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.slot{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--carbon-600);font-size:12px;text-align:center;line-height:1.3;border:1.5px dashed var(--sand-300);border-radius:12px;margin:10px;background:var(--sand-50)}
+.badge{position:absolute;z-index:1;top:10px;left:10px;background:var(--gold-100);color:var(--carbon-900);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:5px 9px;border-radius:6px}
+.prod-body{padding:14px;display:flex;flex-direction:column;gap:6px;flex:1}
+.prod-body .tag{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ember-600);font-weight:600}
+.prod-body h3{font-size:22px;line-height:1.1}
+.prod-body ul{margin:2px 0 0;padding:0;list-style:none;font-size:13px;color:var(--carbon-700);line-height:1.45}
+.price{font-weight:700;font-size:20px;margin-top:auto;padding-top:6px}
+.price small{display:block;font-weight:500;font-size:12px;color:var(--ember-600)}
+.btn-sm{display:flex;align-items:center;justify-content:center;min-height:44px;border-radius:999px;background:var(--ember-500);color:#fff;font-weight:600;font-size:13px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;margin-top:8px}
+.btn-sm:hover{background:var(--ember-600);color:#fff}
+.once{text-align:center;font-weight:600;font-size:14px;text-decoration:underline;text-underline-offset:3px;padding:8px 0 2px}
+@media (max-width:899px){
+  .prod{display:grid;grid-template-columns:40% 1fr}
+  .prod-img{aspect-ratio:auto;min-height:100%}
+  .prod-body h3{font-size:21px}
+}
+@media (min-width:900px){.products{grid-template-columns:repeat(3,1fr);gap:22px}}
+
+/* Testimonios */
+.reviews{background:var(--sand-100)}
+.track{display:flex;gap:14px;margin-top:32px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:0 calc(50% - min(44vw,280px))}
+.track::-webkit-scrollbar{display:none}
+.rev{flex:0 0 min(88vw,560px);scroll-snap-align:center;background:#fff;border-radius:18px;padding:28px 26px;display:flex;flex-direction:column;min-height:300px}
+.rev .q{font-family:var(--serif);font-size:56px;line-height:.6;color:var(--ember-400);height:28px}
+.rev h3{font-family:var(--sans);font-weight:700;font-size:21px;letter-spacing:0;margin-top:6px}
+.rev blockquote{font-family:var(--serif);font-size:19px;line-height:1.45;color:var(--carbon-800);margin:10px 0 18px}
+.rev .who{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:14px;color:var(--carbon-700)}
+.rev .who img{width:56px;height:56px;border-radius:10px;object-fit:cover}
+.car-nav{display:flex;justify-content:center;align-items:center;gap:18px;margin-top:20px}
+.arr{width:48px;height:48px;border-radius:50%;background:var(--ember-500);color:#fff;border:0;font-size:24px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px -6px rgba(43,35,32,.5)}
+.arr:hover{background:var(--ember-600)}
+.dots{display:flex;gap:10px}
+.dots i{width:12px;height:12px;border-radius:50%;border:1.5px solid var(--sand-300);background:#fff}
+.dots i.on{background:var(--sand-300)}
+
+/* Suscripciones */
+.plans{display:grid;gap:14px;margin-top:32px}
+.plan{background:#fff;border:1px solid var(--sand-200);border-radius:18px;padding:24px}
+.plan.hot{border:2px solid var(--ember-500);background:var(--ember-50)}
+.plan small{font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--ember-600)}
+.plan h3{font-size:26px;margin-top:6px}
+.plan .p{font-family:var(--serif);font-size:38px;margin:8px 0}
+.plan .p span{font-size:15px;font-family:var(--sans);color:var(--carbon-600)}
+.plan p{font-size:15px;color:var(--carbon-700);margin:0 0 16px}
+.plan .pill{min-height:50px;font-size:14px;max-width:none}
+.plan:not(.hot) .pill{background:transparent;color:var(--carbon-900);border:1.5px solid var(--carbon-900)}
+.plan:not(.hot) .pill:hover{background:var(--carbon-900);color:#fff}
+.note{text-align:center;font-size:14px;color:var(--carbon-600);margin:20px 0 0}
+@media (min-width:900px){.plans{grid-template-columns:repeat(3,1fr);align-items:start}}
+
+/* Preguntas frecuentes */
+.faq-sec{background:#fff}
+.faq{max-width:760px;margin:32px auto 0;border-top:1px solid var(--sand-300)}
+.faq details{border-bottom:1px solid var(--sand-300)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:16px;padding:20px 0;font-weight:600;font-size:17px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:'+';color:var(--ember-500);font-size:24px;line-height:1}
+.faq details[open] summary::after{content:'−'}
+.faq p{margin:0 0 20px;color:var(--carbon-700)}
+.faq-mail{text-align:center;color:var(--carbon-700);margin:28px auto 0;max-width:48ch}
+
+/* Nuestra historia */
+.story{display:grid;gap:28px;align-items:center}
+.story-img{border-radius:24px;aspect-ratio:4/5;overflow:hidden;background:#000}
+.story-img img{width:100%;height:100%;object-fit:cover}
+.story h2{text-align:left}
+.story p{color:var(--carbon-700);font-size:17px}
+@media (min-width:900px){.story{grid-template-columns:1fr 1fr;gap:56px}}
+
+/* Contacto */
+.touch{background:var(--sand-100);text-align:center}
+.touch p{color:var(--carbon-700);max-width:36ch;margin:12px auto 24px;font-size:17px}
+.socials{display:flex;justify-content:center;align-items:flex-start;gap:22px;margin-top:28px}
+.soc{display:flex;flex-direction:column;align-items:center;gap:8px;text-decoration:none;font-size:13px;color:var(--carbon-700)}
+.soc .ico{width:60px;height:60px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;color:var(--ember-500);transition:transform .2s}
+.soc:hover .ico{transform:translateY(-2px)}
+.soc-off{opacity:.55;pointer-events:none}
+
+/* Pie de página */
+footer{background:var(--sand-100);padding:8px 0 40px}
+footer details{border-top:1px solid var(--sand-300)}
+footer details:last-of-type{border-bottom:1px solid var(--sand-300)}
+footer summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;padding:20px 0;font-weight:700;font-size:19px}
+footer summary::-webkit-details-marker{display:none}
+footer summary::after{content:'▾';font-size:18px}
+footer details[open] summary::after{content:'▴'}
+footer details a{display:block;padding:0 0 14px;text-decoration:none;font-size:17px;color:var(--carbon-800)}
+footer details a:hover{color:var(--ember-600)}
+.legal{margin-top:28px;font-size:13px;color:var(--carbon-600);display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
+@media (min-width:900px){
+  .foot-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:40px}
+  footer details{border:0!important}
+  footer summary{pointer-events:none}
+  footer summary::after,footer details[open] summary::after{content:''}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
 </head>
 <body>
-<x-dc>
-<helmet>
-<style>/* Vesta webfonts — Google Fonts substitutes for the licensed originals.
-   Newsreader  stands in for Canela / Tiempos Text (warm editorial serif).
-   Instrument Sans stands in for Söhne / General Sans (humanist sans).
-   Replace with the licensed files + local @font-face when available. */
-/* latin-ext */
-@font-face {
-  font-family: 'Instrument Sans';
-  font-style: italic;
-  font-weight: 400;
-  font-stretch: 100%;
-  font-display: swap;
-  src: url("assets/fonts/instrument-sans-italic-latin-ext.woff") format('woff');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Instrument Sans';
-  font-style: italic;
-  font-weight: 400;
-  font-stretch: 100%;
-  font-display: swap;
-  src: url("assets/fonts/instrument-sans-italic-latin.woff") format('woff');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Instrument Sans';
-  font-style: normal;
-  font-weight: 400;
-  font-stretch: 100%;
-  font-display: swap;
-  src: url("assets/fonts/instrument-sans-normal-latin-ext.woff2") format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Instrument Sans';
-  font-style: normal;
-  font-weight: 400;
-  font-stretch: 100%;
-  font-display: swap;
-  src: url("assets/fonts/instrument-sans-normal-latin.woff2") format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Instrument Sans';
-  font-style: normal;
-  font-weight: 500;
-  font-stretch: 100%;
-  font-display: swap;
-  src: url("assets/fonts/instrument-sans-normal-latin-ext.woff2") format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Instrument Sans';
-  font-style: normal;
-  font-weight: 500;
-  font-stretch: 100%;
-  font-display: swap;
-  src: url("assets/fonts/instrument-sans-normal-latin.woff2") format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Instrument Sans';
-  font-style: normal;
-  font-weight: 600;
-  font-stretch: 100%;
-  font-display: swap;
-  src: url("assets/fonts/instrument-sans-normal-latin-ext.woff2") format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Instrument Sans';
-  font-style: normal;
-  font-weight: 600;
-  font-stretch: 100%;
-  font-display: swap;
-  src: url("assets/fonts/instrument-sans-normal-latin.woff2") format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* vietnamese */
-@font-face {
-  font-family: 'Newsreader';
-  font-style: italic;
-  font-weight: 300;
-  font-display: swap;
-  src: url("assets/fonts/newsreader-italic-vietnamese.woff2") format('woff2');
-  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Newsreader';
-  font-style: italic;
-  font-weight: 300;
-  font-display: swap;
-  src: url("assets/fonts/newsreader-italic-latin-ext.woff2") format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Newsreader';
-  font-style: italic;
-  font-weight: 300;
-  font-display: swap;
-  src: url("assets/fonts/newsreader-italic-latin.woff2") format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* vietnamese */
-@font-face {
-  font-family: 'Newsreader';
-  font-style: italic;
-  font-weight: 400;
-  font-display: swap;
-  src: url("assets/fonts/newsreader-italic-vietnamese.woff2") format('woff2');
-  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Newsreader';
-  font-style: italic;
-  font-weight: 400;
-  font-display: swap;
-  src: url("assets/fonts/newsreader-italic-latin-ext.woff2") format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Newsreader';
-  font-style: italic;
-  font-weight: 400;
-  font-display: swap;
-  src: url("assets/fonts/newsreader-italic-latin.woff2") format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* vietnamese */
-@font-face {
-  font-family: 'Newsreader';
-  font-style: normal;
-  font-weight: 300;
-  font-display: swap;
-  src: url("assets/fonts/newsreader-normal-vietnamese.woff2") format('woff2');
-  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Newsreader';
-  font-style: normal;
-  font-weight: 300;
-  font-display: swap;
-  src: url("assets/fonts/newsreader-normal-latin-ext.woff2") format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Newsreader';
-  font-style: normal;
-  font-weight: 300;
-  font-display: swap;
-  src: url("assets/fonts/newsreader-normal-latin.woff2") format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* vietnamese */
-@font-face {
-  font-family: 'Newsreader';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("assets/fonts/newsreader-normal-vietnamese.woff2") format('woff2');
-  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Newsreader';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("assets/fonts/newsreader-normal-latin-ext.woff2") format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Newsreader';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("assets/fonts/newsreader-normal-latin.woff2") format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* vietnamese */
-@font-face {
-  font-family: 'Newsreader';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url("assets/fonts/newsreader-normal-vietnamese.woff2") format('woff2');
-  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Newsreader';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url("assets/fonts/newsreader-normal-latin-ext.woff2") format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Newsreader';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url("assets/fonts/newsreader-normal-latin.woff2") format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* vietnamese */
-@font-face {
-  font-family: 'Newsreader';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url("assets/fonts/newsreader-normal-vietnamese.woff2") format('woff2');
-  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Newsreader';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url("assets/fonts/newsreader-normal-latin-ext.woff2") format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Newsreader';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url("assets/fonts/newsreader-normal-latin.woff2") format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
 
-</style>
-<style>:root{
-/* --- Ember (primary): terracotta / amber, the cared-for coal --- */
---ember-50:#FBEEE7;--ember-100:#F5DACB;--ember-200:#EBBCA4;--ember-300:#DE9B7C;
---ember-400:#D0754F;--ember-500:#C1502E;--ember-600:#AA4527;--ember-700:#8B3720;
---ember-800:#6B2A19;--ember-900:#4A1D12;
-/* --- Gold (secondary accent): muted, never metallic-shiny --- */
---gold-100:#F2E6D2;--gold-200:#E3CDA8;--gold-300:#D2B27F;--gold-400:#B98B4E;
---gold-500:#A2763E;--gold-600:#835E30;
-/* --- Sand (surfaces): cream to clay --- */
---sand-50:#FAF5EF;--sand-100:#F3E9DE;--sand-200:#EADCCD;--sand-300:#DCC9B6;
---sand-400:#C4AE99;
-/* --- Carbon (ink): warm near-black --- */
---carbon-900:#2B2320;--carbon-800:#3D332E;--carbon-700:#564A43;--carbon-600:#6E625A;
---carbon-500:#8C8077;--carbon-300:#B4A9A0;
---white:#FFFFFF;
-/* --- Semantic hues, all warmed to the palette --- */
---olive-500:#5C6B4A;--olive-100:#E4E7DA;
---amber-500:#C9862B;--amber-100:#F7E9CF;
---brick-500:#A33326;--brick-100:#F5DBD6;
---slate-500:#4A6470;--slate-100:#DFE6E9;
+<div class="promo">ENVÍO <b>GRATIS</b> A TODA COLOMBIA · Suscríbete y ahorra <b>18%</b> <a href="#formulas">Comprar ›</a></div>
 
-/* ============ Semantic aliases: use these in components ============ */
---text-heading:var(--carbon-900);
---text-body:var(--carbon-800);
---text-muted:var(--carbon-600);
---text-subtle:var(--carbon-500);
---text-on-ember:var(--sand-50);
---text-on-dark:var(--sand-100);
---text-link:var(--ember-600);
---text-link-hover:var(--ember-700);
+<header>
+  <div class="wrap hdr">
+    <button class="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir menú">
+      <svg class="i-open" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg class="i-close" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="display:none"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <a class="logo" href="#inicio"><img src="assets/img/logo.png" alt="" width="23" height="36">avivar</a>
+    <nav class="nav" aria-label="Principal">
+      <a href="#necesidad">Fórmulas</a>
+      <a href="#ciencia">Ciencia</a>
+      <a href="#suscripciones">Suscripciones</a>
+      <a href="#nuestra-historia">Nuestra historia</a>
+    </nav>
+    <a class="bag" href="#formulas" aria-label="Comprar"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="bag-txt">Comprar</span></a>
+  </div>
+  <nav class="menu" id="menu" aria-label="Menú principal" hidden>
+    <a href="#necesidad">Fórmulas</a>
+    <a href="#ciencia">Ciencia</a>
+    <a href="#suscripciones">Suscripciones</a>
+    <a href="#nuestra-historia">Nuestra historia</a>
+    <a class="pill" href="#formulas">Comprar</a>
+  </nav>
+</header>
 
---surface-page:var(--sand-100);
---surface-page-alt:var(--sand-50);
---surface-card:var(--sand-50);
---surface-raised:var(--white);
---surface-sunken:var(--sand-200);
---surface-inverse:var(--carbon-900);
---surface-accent:var(--ember-500);
---surface-accent-soft:var(--ember-50);
+<main>
 
---border-hairline:var(--sand-300);
---border-strong:var(--carbon-900);
---border-accent:var(--ember-500);
---border-focus:var(--ember-600);
+<section class="hero" id="inicio">
+  <div class="wrap">
+    <span class="eyebrow">Tú eres tu bienestar</span>
+    <h1><span>El fuego que se cuida,</span><em>no se apaga</em></h1>
+    <p>Te acompañamos en tu segunda juventud: menos calores y sofocos, tu sistema hormonal en equilibrio y más bienestar.</p>
+    <a class="pill" href="#formulas">Comprar</a>
+    <div class="chips"><span class="chip"><b>+300</b> mujeres confían en nosotros</span><span class="chip"><b>Gratis</b> envío nacional</span></div>
+    <div class="hero-media"><video src="assets/video/avivar.mp4" poster="assets/img/video-poster.jpg" autoplay muted loop playsinline preload="auto" aria-label="Frasco de gomas CALOR de Avivar"></video></div>
+  </div>
+</section>
 
---action-primary-bg:var(--ember-500);
---action-primary-bg-hover:var(--ember-600);
---action-primary-bg-active:var(--ember-700);
---action-primary-fg:var(--sand-50);
---action-secondary-bg:transparent;
---action-secondary-fg:var(--carbon-900);
---action-secondary-border:var(--carbon-900);
---action-disabled-bg:var(--sand-300);
---action-disabled-fg:var(--carbon-500);
-
---feedback-success-fg:var(--olive-500);--feedback-success-bg:var(--olive-100);
---feedback-warning-fg:var(--amber-500);--feedback-warning-bg:var(--amber-100);
---feedback-error-fg:var(--brick-500);--feedback-error-bg:var(--brick-100);
---feedback-info-fg:var(--slate-500);--feedback-info-bg:var(--slate-100);
-}
-:root[data-theme="ember"]{
---surface-page:var(--carbon-900);--surface-page-alt:var(--carbon-800);
---surface-card:var(--carbon-800);--surface-raised:var(--carbon-800);
---text-heading:var(--sand-50);--text-body:var(--sand-100);--text-muted:var(--sand-400);
---border-hairline:var(--carbon-700);--action-secondary-fg:var(--sand-50);
---action-secondary-border:var(--sand-300);--text-link:var(--gold-300);--text-link-hover:var(--gold-200);
-}
-</style>
-<style>:root{
---font-display:"Newsreader",Georgia,"Times New Roman",serif;
---font-body:"Instrument Sans","Helvetica Neue",Arial,sans-serif;
---font-mono:ui-monospace,"SFMono-Regular",Menlo,monospace;
-
---fw-light:300; /* @kind font */
---fw-regular:400; /* @kind font */
---fw-medium:500; /* @kind font */
---fw-semibold:600; /* @kind font */
-
-/* Editorial display scale — serif, tight leading, slight negative tracking */
---fs-display-xl:76px;--lh-display-xl:1.02; /* @kind font */
---fs-display-l:56px;--lh-display-l:1.06; /* @kind font */
---fs-display-m:42px;--lh-display-m:1.1; /* @kind font */
---fs-display-s:32px;--lh-display-s:1.15; /* @kind font */
---fs-display-xs:25px;--lh-display-xs:1.2; /* @kind font */
-
-/* Body scale — sans, generous leading */
---fs-body-l:19px;--lh-body-l:1.6; /* @kind font */
---fs-body-m:17px;--lh-body-m:1.65; /* @kind font */
---fs-body-s:15px;--lh-body-s:1.55; /* @kind font */
---fs-caption:13px;--lh-caption:1.45; /* @kind font */
---fs-label:12px;--lh-label:1.2; /* @kind font */
-
---tracking-display:-0.015em; /* @kind font */
---tracking-body:0em; /* @kind font */
---tracking-eyebrow:0.14em; /* @kind font */
---tracking-label:0.06em; /* @kind font */
-
---measure-prose:64ch; /* @kind other */
---measure-narrow:46ch; /* @kind other */
-}
-</style>
-<style>:root{
---space-0:0px;--space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:20px;
---space-6:24px;--space-8:32px;--space-10:40px;--space-12:48px;--space-16:64px;
---space-20:80px;--space-24:96px;--space-32:128px;--space-40:160px;
-/* Editorial rhythm */
---gutter:var(--space-6);
---section-y:var(--space-24);
---section-y-tight:var(--space-16);
---container-max:1240px; /* @kind spacing */
---container-prose:680px;
---rule-weight:1px; /* @kind spacing */
-}
-</style>
-<style>:root{
-/* Editorial print feel: corners are nearly square. Pills only for tags/chips. */
---radius-none:0px;--radius-xs:2px;--radius-sm:4px;--radius-md:6px;--radius-lg:10px;
---radius-pill:999px;--radius-circle:50%;
---radius-card:var(--radius-sm);
---radius-control:var(--radius-xs);
---radius-image:var(--radius-sm);
-}
-</style>
-<style>:root{
-/* Shadows are warm-tinted (carbon, never blue-black) and rare. */
---shadow-none:none;
---shadow-hairline:0 0 0 1px var(--border-hairline);
---shadow-sm:0 1px 2px rgba(43,35,32,.06);
---shadow-md:0 4px 14px rgba(43,35,32,.08);
---shadow-lg:0 18px 44px rgba(43,35,32,.12);
---shadow-inset-hairline:inset 0 0 0 1px var(--border-hairline);
---ring-focus:0 0 0 3px rgba(193,80,46,.28);
-/* Protection gradient for text over photography */
---scrim-bottom:linear-gradient(to top,rgba(43,35,32,.78) 0%,rgba(43,35,32,.32) 46%,rgba(43,35,32,0) 100%); /* @kind other */
---scrim-flat:rgba(43,35,32,.44);
-}
-</style>
-<style>:root{
---dur-fast:120ms; /* @kind other */
---dur-base:200ms; /* @kind other */
---dur-slow:340ms; /* @kind other */
---dur-reveal:600ms; /* @kind other */
-/* Calm, no bounce, no overshoot. */
---ease-standard:cubic-bezier(.2,.6,.2,1); /* @kind other */
---ease-out:cubic-bezier(.16,.84,.44,1); /* @kind other */
---ease-in:cubic-bezier(.5,0,.75,0); /* @kind other */
---transition-control:background-color var(--dur-base) var(--ease-standard),color var(--dur-base) var(--ease-standard),border-color var(--dur-base) var(--ease-standard); /* @kind other */
-}
-@media (prefers-reduced-motion:reduce){:root{
---dur-fast:1ms; /* @kind other */
---dur-base:1ms; /* @kind other */
---dur-slow:1ms; /* @kind other */
---dur-reveal:1ms; /* @kind other */
-}}
-</style>
-<style>*,*::before,*::after{box-sizing:border-box}
-body{margin:0;background:var(--surface-page);color:var(--text-body);font-family:var(--font-body);font-size:var(--fs-body-m);line-height:var(--lh-body-m);-webkit-font-smoothing:antialiased;text-wrap:pretty}
-h1,h2,h3,h4{font-family:var(--font-display);font-weight:var(--fw-regular);color:var(--text-heading);letter-spacing:var(--tracking-display);margin:0}
-p{margin:0}
-a{color:var(--text-link);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--text-link) 40%,transparent);transition:var(--transition-control)}
-a:hover{color:var(--text-link-hover);border-bottom-color:var(--text-link-hover)}
-::selection{background:var(--ember-100);color:var(--carbon-900)}
-:focus-visible{outline:none;box-shadow:var(--ring-focus)}
-.v-eyebrow{font-family:var(--font-body);font-size:var(--fs-label);font-weight:var(--fw-medium);letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;color:var(--text-muted)}
-.v-rule{height:1px;background:var(--border-hairline);border:0;margin:0}
-</style>
-<style>/* Vesta webfonts — Google Fonts substitutes for the licensed originals.
-   Newsreader  stands in for Canela / Tiempos Text (warm editorial serif).
-   Instrument Sans stands in for Söhne / General Sans (humanist sans).
-   Replace with the licensed files + local @font-face when available. */
-/* latin-ext */
-@font-face {
-  font-family: 'Instrument Sans';
-  font-style: italic;
-  font-weight: 400;
-  font-stretch: 100%;
-  font-display: swap;
-  src: url("assets/fonts/instrument-sans-italic-latin-ext.woff") format('woff');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Instrument Sans';
-  font-style: italic;
-  font-weight: 400;
-  font-stretch: 100%;
-  font-display: swap;
-  src: url("assets/fonts/instrument-sans-italic-latin.woff") format('woff');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Instrument Sans';
-  font-style: normal;
-  font-weight: 400;
-  font-stretch: 100%;
-  font-display: swap;
-  src: url("assets/fonts/instrument-sans-normal-latin-ext.woff2") format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Instrument Sans';
-  font-style: normal;
-  font-weight: 400;
-  font-stretch: 100%;
-  font-display: swap;
-  src: url("assets/fonts/instrument-sans-normal-latin.woff2") format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Instrument Sans';
-  font-style: normal;
-  font-weight: 500;
-  font-stretch: 100%;
-  font-display: swap;
-  src: url("assets/fonts/instrument-sans-normal-latin-ext.woff2") format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Instrument Sans';
-  font-style: normal;
-  font-weight: 500;
-  font-stretch: 100%;
-  font-display: swap;
-  src: url("assets/fonts/instrument-sans-normal-latin.woff2") format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Instrument Sans';
-  font-style: normal;
-  font-weight: 600;
-  font-stretch: 100%;
-  font-display: swap;
-  src: url("assets/fonts/instrument-sans-normal-latin-ext.woff2") format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Instrument Sans';
-  font-style: normal;
-  font-weight: 600;
-  font-stretch: 100%;
-  font-display: swap;
-  src: url("assets/fonts/instrument-sans-normal-latin.woff2") format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* vietnamese */
-@font-face {
-  font-family: 'Newsreader';
-  font-style: italic;
-  font-weight: 300;
-  font-display: swap;
-  src: url("assets/fonts/newsreader-italic-vietnamese.woff2") format('woff2');
-  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Newsreader';
-  font-style: italic;
-  font-weight: 300;
-  font-display: swap;
-  src: url("assets/fonts/newsreader-italic-latin-ext.woff2") format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Newsreader';
-  font-style: italic;
-  font-weight: 300;
-  font-display: swap;
-  src: url("assets/fonts/newsreader-italic-latin.woff2") format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* vietnamese */
-@font-face {
-  font-family: 'Newsreader';
-  font-style: italic;
-  font-weight: 400;
-  font-display: swap;
-  src: url("assets/fonts/newsreader-italic-vietnamese.woff2") format('woff2');
-  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Newsreader';
-  font-style: italic;
-  font-weight: 400;
-  font-display: swap;
-  src: url("assets/fonts/newsreader-italic-latin-ext.woff2") format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Newsreader';
-  font-style: italic;
-  font-weight: 400;
-  font-display: swap;
-  src: url("assets/fonts/newsreader-italic-latin.woff2") format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* vietnamese */
-@font-face {
-  font-family: 'Newsreader';
-  font-style: normal;
-  font-weight: 300;
-  font-display: swap;
-  src: url("assets/fonts/newsreader-normal-vietnamese.woff2") format('woff2');
-  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Newsreader';
-  font-style: normal;
-  font-weight: 300;
-  font-display: swap;
-  src: url("assets/fonts/newsreader-normal-latin-ext.woff2") format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Newsreader';
-  font-style: normal;
-  font-weight: 300;
-  font-display: swap;
-  src: url("assets/fonts/newsreader-normal-latin.woff2") format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* vietnamese */
-@font-face {
-  font-family: 'Newsreader';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("assets/fonts/newsreader-normal-vietnamese.woff2") format('woff2');
-  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Newsreader';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("assets/fonts/newsreader-normal-latin-ext.woff2") format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Newsreader';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("assets/fonts/newsreader-normal-latin.woff2") format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* vietnamese */
-@font-face {
-  font-family: 'Newsreader';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url("assets/fonts/newsreader-normal-vietnamese.woff2") format('woff2');
-  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Newsreader';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url("assets/fonts/newsreader-normal-latin-ext.woff2") format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Newsreader';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url("assets/fonts/newsreader-normal-latin.woff2") format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* vietnamese */
-@font-face {
-  font-family: 'Newsreader';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url("assets/fonts/newsreader-normal-vietnamese.woff2") format('woff2');
-  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Newsreader';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url("assets/fonts/newsreader-normal-latin-ext.woff2") format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Newsreader';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url("assets/fonts/newsreader-normal-latin.woff2") format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-
-:root{
-/* --- Ember (primary): terracotta / amber, the cared-for coal --- */
---ember-50:#FBEEE7;--ember-100:#F5DACB;--ember-200:#EBBCA4;--ember-300:#DE9B7C;
---ember-400:#D0754F;--ember-500:#C1502E;--ember-600:#AA4527;--ember-700:#8B3720;
---ember-800:#6B2A19;--ember-900:#4A1D12;
-/* --- Gold (secondary accent): muted, never metallic-shiny --- */
---gold-100:#F2E6D2;--gold-200:#E3CDA8;--gold-300:#D2B27F;--gold-400:#B98B4E;
---gold-500:#A2763E;--gold-600:#835E30;
-/* --- Sand (surfaces): cream to clay --- */
---sand-50:#FAF5EF;--sand-100:#F3E9DE;--sand-200:#EADCCD;--sand-300:#DCC9B6;
---sand-400:#C4AE99;
-/* --- Carbon (ink): warm near-black --- */
---carbon-900:#2B2320;--carbon-800:#3D332E;--carbon-700:#564A43;--carbon-600:#6E625A;
---carbon-500:#8C8077;--carbon-300:#B4A9A0;
---white:#FFFFFF;
-/* --- Semantic hues, all warmed to the palette --- */
---olive-500:#5C6B4A;--olive-100:#E4E7DA;
---amber-500:#C9862B;--amber-100:#F7E9CF;
---brick-500:#A33326;--brick-100:#F5DBD6;
---slate-500:#4A6470;--slate-100:#DFE6E9;
-
-/* ============ Semantic aliases: use these in components ============ */
---text-heading:var(--carbon-900);
---text-body:var(--carbon-800);
---text-muted:var(--carbon-600);
---text-subtle:var(--carbon-500);
---text-on-ember:var(--sand-50);
---text-on-dark:var(--sand-100);
---text-link:var(--ember-600);
---text-link-hover:var(--ember-700);
-
---surface-page:var(--sand-100);
---surface-page-alt:var(--sand-50);
---surface-card:var(--sand-50);
---surface-raised:var(--white);
---surface-sunken:var(--sand-200);
---surface-inverse:var(--carbon-900);
---surface-accent:var(--ember-500);
---surface-accent-soft:var(--ember-50);
-
---border-hairline:var(--sand-300);
---border-strong:var(--carbon-900);
---border-accent:var(--ember-500);
---border-focus:var(--ember-600);
-
---action-primary-bg:var(--ember-500);
---action-primary-bg-hover:var(--ember-600);
---action-primary-bg-active:var(--ember-700);
---action-primary-fg:var(--sand-50);
---action-secondary-bg:transparent;
---action-secondary-fg:var(--carbon-900);
---action-secondary-border:var(--carbon-900);
---action-disabled-bg:var(--sand-300);
---action-disabled-fg:var(--carbon-500);
-
---feedback-success-fg:var(--olive-500);--feedback-success-bg:var(--olive-100);
---feedback-warning-fg:var(--amber-500);--feedback-warning-bg:var(--amber-100);
---feedback-error-fg:var(--brick-500);--feedback-error-bg:var(--brick-100);
---feedback-info-fg:var(--slate-500);--feedback-info-bg:var(--slate-100);
-}
-:root[data-theme="ember"]{
---surface-page:var(--carbon-900);--surface-page-alt:var(--carbon-800);
---surface-card:var(--carbon-800);--surface-raised:var(--carbon-800);
---text-heading:var(--sand-50);--text-body:var(--sand-100);--text-muted:var(--sand-400);
---border-hairline:var(--carbon-700);--action-secondary-fg:var(--sand-50);
---action-secondary-border:var(--sand-300);--text-link:var(--gold-300);--text-link-hover:var(--gold-200);
-}
-
-:root{
---font-display:"Newsreader",Georgia,"Times New Roman",serif;
---font-body:"Instrument Sans","Helvetica Neue",Arial,sans-serif;
---font-mono:ui-monospace,"SFMono-Regular",Menlo,monospace;
-
---fw-light:300; /* @kind font */
---fw-regular:400; /* @kind font */
---fw-medium:500; /* @kind font */
---fw-semibold:600; /* @kind font */
-
-/* Editorial display scale — serif, tight leading, slight negative tracking */
---fs-display-xl:76px;--lh-display-xl:1.02; /* @kind font */
---fs-display-l:56px;--lh-display-l:1.06; /* @kind font */
---fs-display-m:42px;--lh-display-m:1.1; /* @kind font */
---fs-display-s:32px;--lh-display-s:1.15; /* @kind font */
---fs-display-xs:25px;--lh-display-xs:1.2; /* @kind font */
-
-/* Body scale — sans, generous leading */
---fs-body-l:19px;--lh-body-l:1.6; /* @kind font */
---fs-body-m:17px;--lh-body-m:1.65; /* @kind font */
---fs-body-s:15px;--lh-body-s:1.55; /* @kind font */
---fs-caption:13px;--lh-caption:1.45; /* @kind font */
---fs-label:12px;--lh-label:1.2; /* @kind font */
-
---tracking-display:-0.015em; /* @kind font */
---tracking-body:0em; /* @kind font */
---tracking-eyebrow:0.14em; /* @kind font */
---tracking-label:0.06em; /* @kind font */
-
---measure-prose:64ch; /* @kind other */
---measure-narrow:46ch; /* @kind other */
-}
-
-:root{
---space-0:0px;--space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:20px;
---space-6:24px;--space-8:32px;--space-10:40px;--space-12:48px;--space-16:64px;
---space-20:80px;--space-24:96px;--space-32:128px;--space-40:160px;
-/* Editorial rhythm */
---gutter:var(--space-6);
---section-y:var(--space-24);
---section-y-tight:var(--space-16);
---container-max:1240px; /* @kind spacing */
---container-prose:680px;
---rule-weight:1px; /* @kind spacing */
-}
-
-:root{
-/* Editorial print feel: corners are nearly square. Pills only for tags/chips. */
---radius-none:0px;--radius-xs:2px;--radius-sm:4px;--radius-md:6px;--radius-lg:10px;
---radius-pill:999px;--radius-circle:50%;
---radius-card:var(--radius-sm);
---radius-control:var(--radius-xs);
---radius-image:var(--radius-sm);
-}
-
-:root{
-/* Shadows are warm-tinted (carbon, never blue-black) and rare. */
---shadow-none:none;
---shadow-hairline:0 0 0 1px var(--border-hairline);
---shadow-sm:0 1px 2px rgba(43,35,32,.06);
---shadow-md:0 4px 14px rgba(43,35,32,.08);
---shadow-lg:0 18px 44px rgba(43,35,32,.12);
---shadow-inset-hairline:inset 0 0 0 1px var(--border-hairline);
---ring-focus:0 0 0 3px rgba(193,80,46,.28);
-/* Protection gradient for text over photography */
---scrim-bottom:linear-gradient(to top,rgba(43,35,32,.78) 0%,rgba(43,35,32,.32) 46%,rgba(43,35,32,0) 100%); /* @kind other */
---scrim-flat:rgba(43,35,32,.44);
-}
-
-:root{
---dur-fast:120ms; /* @kind other */
---dur-base:200ms; /* @kind other */
---dur-slow:340ms; /* @kind other */
---dur-reveal:600ms; /* @kind other */
-/* Calm, no bounce, no overshoot. */
---ease-standard:cubic-bezier(.2,.6,.2,1); /* @kind other */
---ease-out:cubic-bezier(.16,.84,.44,1); /* @kind other */
---ease-in:cubic-bezier(.5,0,.75,0); /* @kind other */
---transition-control:background-color var(--dur-base) var(--ease-standard),color var(--dur-base) var(--ease-standard),border-color var(--dur-base) var(--ease-standard); /* @kind other */
-}
-@media (prefers-reduced-motion:reduce){:root{
---dur-fast:1ms; /* @kind other */
---dur-base:1ms; /* @kind other */
---dur-slow:1ms; /* @kind other */
---dur-reveal:1ms; /* @kind other */
-}}
-
-*,*::before,*::after{box-sizing:border-box}
-body{margin:0;background:var(--surface-page);color:var(--text-body);font-family:var(--font-body);font-size:var(--fs-body-m);line-height:var(--lh-body-m);-webkit-font-smoothing:antialiased;text-wrap:pretty}
-h1,h2,h3,h4{font-family:var(--font-display);font-weight:var(--fw-regular);color:var(--text-heading);letter-spacing:var(--tracking-display);margin:0}
-p{margin:0}
-a{color:var(--text-link);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--text-link) 40%,transparent);transition:var(--transition-control)}
-a:hover{color:var(--text-link-hover);border-bottom-color:var(--text-link-hover)}
-::selection{background:var(--ember-100);color:var(--carbon-900)}
-:focus-visible{outline:none;box-shadow:var(--ring-focus)}
-.v-eyebrow{font-family:var(--font-body);font-size:var(--fs-label);font-weight:var(--fw-medium);letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;color:var(--text-muted)}
-.v-rule{height:1px;background:var(--border-hairline);border:0;margin:0}
-
-</style>
-<script src="assets/js/vesta-design-system.js"></script>
-<script src="assets/js/image-slot.js"></script>
-<style>
-  body{margin:0;background:var(--sand-100);}
-  a{color:var(--text-link);text-decoration:none;}
-  a:hover{color:var(--text-link-hover);}
-  @media (prefers-reduced-motion:reduce){*{transition-duration:1ms !important;}}
-  section[id]{scroll-margin-top:72px;}
-  .av-menu-btn,.av-menu-movil{display:none;}
-  @media (max-width:760px){
-    .av-nav{display:none !important;}
-    .av-menu-btn{display:inline-flex;}
-    .av-menu-movil{display:block;}
-  }
-</style>
-</helmet>
-
-<div style="background:var(--sand-100);color:var(--carbon-800);font-family:var(--font-body,'Instrument Sans',system-ui,sans-serif);font-size:17px;line-height:1.6;min-height:100%">
-
-  <header style="position:sticky;top:0;z-index:40;background:rgba(243,233,222,.88);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--sand-300)">
-    <div style="max-width:1240px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:24px">
-      <a href="#inicio" style="display:flex;align-items:center;gap:10px;color:var(--carbon-900)">
-        <img src="assets/img/logo.png" alt="" style="height:38px;width:auto;display:block">
-        <span style="font-family:var(--font-display,'Newsreader',Georgia,serif);font-size:26px;line-height:1;letter-spacing:-.015em;color:var(--carbon-900)">avivar</span>
-      </a>
-      <nav class="av-nav" style="display:flex;align-items:center;gap:28px;font-size:15px">
-        <a href="#ciencia" style="color:var(--carbon-800)">Ciencia</a>
-        <a href="#suscripciones" style="color:var(--carbon-800)">Suscripciones</a>
-        <a href="#nuestra-historia" style="color:var(--carbon-800)">Nuestra historia</a>
-        <x-import component-from-global-scope="VestaDesignSystem_e6d2b4.Button" size="sm" hint-size="140px,36px">COMPRAR</x-import>
-      </nav>
-      <button type="button" class="av-menu-btn" sc-camel-on-click="{{ toggleMenu }}" aria-expanded="{{ menuAbierto }}" aria-controls="menu-movil" aria-label="{{ menuLabel }}" style="align-items:center;justify-content:center;width:44px;height:44px;margin-right:-10px;padding:0;background:none;border:none;border-radius:8px;cursor:pointer;color:var(--carbon-900)" style-hover="color:var(--ember-600)">
-        <sc-if value="{{ menuCerrado }}" hint-placeholder-val="{{ true }}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></sc-if>
-        <sc-if value="{{ menuAbierto }}" hint-placeholder-val="{{ false }}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></sc-if>
-      </button>
+<section id="necesidad">
+  <div class="wrap">
+    <span class="eyebrow" style="text-align:center">Formulación consciente, bienestar garantizado</span>
+    <h2>¿Cómo te <em>ayudamos</em>?</h2>
+    <p class="lead">Una fórmula para cada síntoma de la transición hormonal, con la dosis de los estudios.</p>
+    <div class="needs">
+      <a class="need n1" href="#formulas"><small>Sofocos y sudoración</small><strong>Termo&shy;rregulación <span class="arrow">→</span></strong><img src="assets/img/frasco-1.jpg" alt="" loading="lazy"></a>
+      <a class="need n2" href="#formulas"><small>Sofocos y sudoración</small><strong>Regulación <span class="arrow">→</span></strong><img src="assets/img/frasco-2.jpg" alt="" loading="lazy"></a>
+      <a class="need n3 need-wide" href="#formulas"><span class="t"><small>Hueso y energía</small><strong>Base diaria <span class="arrow">→</span></strong></span><img src="assets/img/frasco-3.jpg" alt="" loading="lazy"></a>
     </div>
-    <sc-if value="{{ menuAbierto }}" hint-placeholder-val="{{ false }}">
-      <nav id="menu-movil" class="av-menu-movil" aria-label="Menú principal" style="border-top:1px solid var(--sand-300);padding:8px 24px 24px">
-        <a href="#ciencia" sc-camel-on-click="{{ cerrarMenu }}" style="display:block;padding:14px 0;border-bottom:1px solid var(--sand-300);font-size:18px;color:var(--carbon-800)">Ciencia</a>
-        <a href="#suscripciones" sc-camel-on-click="{{ cerrarMenu }}" style="display:block;padding:14px 0;border-bottom:1px solid var(--sand-300);font-size:18px;color:var(--carbon-800)">Suscripciones</a>
-        <a href="#nuestra-historia" sc-camel-on-click="{{ cerrarMenu }}" style="display:block;padding:14px 0;border-bottom:1px solid var(--sand-300);font-size:18px;color:var(--carbon-800)">Nuestra historia</a>
-        <div style="padding-top:20px">
-          <x-import component-from-global-scope="VestaDesignSystem_e6d2b4.Button" as="a" href="#formulas" full="{{ true }}" sc-camel-on-click="{{ cerrarMenu }}" hint-size="100%,44px">COMPRAR</x-import>
-        </div>
-      </nav>
-    </sc-if>
-  </header>
+    <div class="after"><a class="pill" href="#formulas">Ver todas las fórmulas</a></div>
+  </div>
+</section>
 
-  <section id="inicio" style="background:var(--ember-500);color:var(--sand-50);border-bottom:1px solid var(--ember-700)">
-    <div style="max-width:1240px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:56px;align-items:center">
-      <div style="padding:96px 0">
-        <div style="display:flex;align-items:center;gap:12px;margin-bottom:28px">
-          <span style="font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:.14em;color:var(--sand-100)">Tu eres tu bienestar</span>
-          <span style="flex:1;height:1px;background:var(--ember-300);max-width:120px"></span>
-        </div>
-        <h1 style="font-family:var(--font-display,'Newsreader',Georgia,serif);font-weight:400;font-size:clamp(42px,5.4vw,76px);line-height:1.04;letter-spacing:-.015em;margin:0 0 24px;color:var(--sand-50);text-wrap:pretty">El fuego que se cuida, no se apaga</h1>
-        <p style="font-size:19px;line-height:1.6;max-width:52ch;margin:0 0 36px;color:var(--sand-100)">Te acompañamos en tu segunda juventud contribuimos a reducir: 1. Calores y sofocos. 2. Regular tu sistema hormonal. 3. maximizar tu bienestar</p>
-        <div style="display:flex;flex-wrap:wrap;gap:14px;align-items:center">
-          <x-import component-from-global-scope="VestaDesignSystem_e6d2b4.Button" size="lg" variant="inverse" hint-size="190px,52px">COMPRAR</x-import>
-          <a href="#ciencia" style="font-size:17px;font-weight:500;color:var(--sand-50);border-bottom:1px solid var(--sand-200);padding-bottom:3px" style-hover="border-bottom-color:var(--sand-50)">Leer la evidencia</a>
-        </div>
-        <div style="display:flex;flex-wrap:wrap;gap:28px;margin-top:56px;padding-top:28px;border-top:1px solid var(--ember-400)">
-          <div><div style="font-family:var(--font-display,'Newsreader',Georgia,serif);font-size:32px;line-height:1.1;color:var(--sand-50)">+300</div><div style="font-size:13px;color:var(--sand-200)">mujeres confian en nostor</div></div>
-          <div><div style="font-family:var(--font-display,'Newsreader',Georgia,serif);font-size:32px;line-height:1.1;color:var(--sand-50)">Gratis</div><div style="font-size:13px;color:var(--sand-200)">envio nacional</div></div>
-        </div>
-      </div>
-      <div style="position:relative;min-height:560px;align-self:stretch">
-        <sc-if value="{{ heroFallo }}" hint-placeholder-val="{{ false }}"><image-slot id="hero-retrato" shape="rect" fit="cover" placeholder="Retrato a media distancia · mujer colombiana de 45-60 · luz natural cálida · gesto sereno · recorte 4/5"></image-slot></sc-if>
-        <sc-if value="{{ heroOk }}" hint-placeholder-val="{{ true }}"><video ref="{{ videoRef }}" src="{{ heroSrc }}" sc-camel-auto-play="{{ true }}" muted="{{ true }}" loop="{{ true }}" sc-camel-plays-inline="{{ true }}" preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"></video></sc-if>
-        <img src="assets/img/logo-light.png" alt="" style="position:absolute;bottom:24px;right:24px;height:120px;width:auto;opacity:.9;pointer-events:none">
-      </div>
+<section class="band" aria-label="Video de Avivar">
+  <video src="assets/video/avivar.mp4" poster="assets/img/video-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+  <div class="cap"><p>El fuego que se cuida, no se apaga</p></div>
+</section>
+
+<section class="science" id="ciencia">
+  <div class="science-photo">
+    <img src="assets/img/mujer-calor.jpg" alt="Mujer sonriendo mientras come una goma Avivar" loading="lazy">
+    <div class="science-dot"><img src="assets/img/frasco-4.jpg" alt="" loading="lazy"></div>
+  </div>
+  <div class="wrap">
+    <span class="eyebrow">Formulación basada en ciencia</span>
+    <h2>Formulada con <em>ciencia</em>, no con promesas</h2>
+    <p class="lead">Cada ingrediente está en la dosis que usaron los estudios y declarado miligramo a miligramo en la etiqueta. Nuestras fórmulas trabajan sobre el mecanismo de los sofocos, no sobre la sensación.</p>
+    <div class="stats">
+      <div class="stat"><div class="num">68%</div><div><h3>Menos despertares</h3><p>reportó menos despertares nocturnos frente al 31% del grupo placebo.</p><span class="src">Ensayo aleatorizado, 312 mujeres, 12 semanas</span></div></div>
+      <div class="stat"><div class="num">2–4<small>semanas</small></div><div><h3>Efecto medible</h3><p>hasta los primeros efectos medibles en calidad de sueño.</p><span class="src">Seguimiento semanal por diario validado</span></div></div>
+      <div class="stat"><div class="num">100%</div><div><h3>Transparente</h3><p>de los miligramos declarados en la etiqueta, sin mezclas propietarias.</p><span class="src">Certificado de análisis por lote, público</span></div></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <sc-if value="{{ mostrarBarraConfianza }}" hint-placeholder-val="{{ true }}">
-    <section style="border-bottom:1px solid var(--sand-300);background:var(--sand-50)">
-      <div style="max-width:1240px;margin:0 auto;padding:28px 24px;display:flex;flex-wrap:wrap;gap:16px 48px;align-items:center;justify-content:center;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--carbon-600)">
-        <span>Envío gratis a toda colombia</span>
-        <span style="color:var(--sand-400)">·</span>
-        <span>Envío gratis a toda colombia</span>
-        <span style="color:var(--sand-400)">·</span>
-        <span>Envío gratis a toda colombia</span>
-      </div>
-    </section>
-  </sc-if>
-
-  <section id="video" style="position:relative;width:100%;background:var(--carbon-900);aspect-ratio:16/7;min-height:360px;overflow:hidden">
-    <sc-if value="{{ hayVideo }}" hint-placeholder-val="{{ false }}">
-      <video ref="{{ videoRef }}" src="{{ videoSrc }}" sc-camel-auto-play="{{ true }}" muted="{{ true }}" loop="{{ true }}" sc-camel-plays-inline="{{ true }}" preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"></video>
-    </sc-if>
-    <sc-if value="{{ sinVideo }}" hint-placeholder-val="{{ true }}">
-      <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:12px;padding:56px 24px 24px;text-align:center;color:var(--sand-200);border:1px dashed var(--carbon-700)">
-        <x-import component-from-global-scope="VestaDesignSystem_e6d2b4.Icon" name="play" size="{{ 24 }}" color="var(--sand-200)" hint-size="24px,24px"></x-import>
-        <div style="font-size:15px;max-width:52ch">Video en loop · sube tu archivo .mp4 a <strong style="font-weight:500;color:var(--sand-50)">assets/video/avivar.mp4</strong> o cambia la ruta en Tweaks</div>
-        <div style="font-size:13px;color:var(--sand-400)">Sin sonido · 10-20 s · luz natural cálida · 1920×840 o mayor</div>
-      </div>
-    </sc-if>
-    <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(43,35,32,.78),rgba(43,35,32,0) 55%);pointer-events:none"></div>
-    <div style="position:absolute;left:0;right:0;bottom:0;max-width:1240px;margin:0 auto;padding:40px 24px;color:var(--sand-50)">
-      <div style="font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:.14em;color:var(--gold-400);margin-bottom:12px">Avivar</div>
-      <div style="font-family:var(--font-display,'Newsreader',Georgia,serif);font-size:clamp(28px,3.4vw,42px);line-height:1.15;letter-spacing:-.015em;max-width:22ch">El fuego que se cuida, no se apaga</div>
+<section class="products-sec" id="formulas">
+  <div class="wrap">
+    <h2>Nuestras <em>fórmulas</em></h2>
+    <div class="products">
+      <!--
+        FOTOS DE PRODUCTO: para poner la foto de cada fórmula, sube la imagen a assets/img/
+        (fondo claro, cuadrada) y reemplaza el bloque <div class="slot">…</div> de esa fórmula por:
+        <img src="assets/img/NOMBRE-DE-TU-FOTO.jpg" alt="Frasco de Termorregulación de Avivar">
+      -->
+      <article class="prod">
+        <div class="prod-img"><span class="badge">Sofocos</span><div class="slot"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 17l-5-5-9 8"/></svg><span>Foto del producto</span></div></div>
+        <div class="prod-body"><span class="tag">Sofocos y sudoración</span><h3>Termorregulación</h3><ul><li>Cimicifuga racemosa 40 mg</li><li>Salvia officinalis 300 mg</li><li>Vitamina E 15 mg</li></ul><div class="price">$169.000<small>Ahorra 18% con suscripción</small></div><a class="btn-sm" href="#suscripciones">Suscribirme</a><a class="once" href="#suscripciones">Compra única</a></div>
+      </article>
+      <article class="prod">
+        <div class="prod-img"><span class="badge">Sofocos</span><div class="slot"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 17l-5-5-9 8"/></svg><span>Foto del producto</span></div></div>
+        <div class="prod-body"><span class="tag">Sofocos y sudoración</span><h3>Regulación</h3><ul><li>Cimicifuga racemosa 40 mg</li><li>Salvia officinalis 300 mg</li><li>Vitamina E 15 mg</li></ul><div class="price">$149.000<small>Ahorra 18% con suscripción</small></div><a class="btn-sm" href="#suscripciones">Suscribirme</a><a class="once" href="#suscripciones">Compra única</a></div>
+      </article>
+      <article class="prod">
+        <div class="prod-img"><span class="badge">Energía</span><div class="slot"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 17l-5-5-9 8"/></svg><span>Foto del producto</span></div></div>
+        <div class="prod-body"><span class="tag">Hueso y energía</span><h3>Base diaria</h3><ul><li>Vitamina D3 2.000 UI</li><li>Calcio citrato 600 mg</li><li>Omega-3 EPA/DHA 1.000 mg</li></ul><div class="price">$139.000<small>Ahorra 18% con suscripción</small></div><a class="btn-sm" href="#suscripciones">Suscribirme</a><a class="once" href="#suscripciones">Compra única</a></div>
+      </article>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="formulas" style="max-width:1240px;margin:0 auto;padding:96px 24px">
-    <div style="max-width:680px;margin-bottom:56px">
-      <div style="font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:.14em;color:var(--carbon-600);margin-bottom:14px">Formulación consciente, bienestar garantizado</div>
-      <div style="height:1px;background:var(--sand-300);margin-bottom:28px"></div>
-      <h2 style="font-family:var(--font-display,'Newsreader',Georgia,serif);font-weight:400;font-size:clamp(32px,3.6vw,56px);line-height:1.1;letter-spacing:-.015em;margin:0 0 20px;color:var(--carbon-900)">¿ Cómo te ayudamos ? </h2>
-      <p style="margin:0;color:var(--carbon-700)">Te ayudamos a regularte, con diferentes mecanismos, todos orientados a tu bienestar.</p>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:24px">
-      <sc-for list="{{ formulas }}" as="f" hint-placeholder-count="3">
-        <article style="background:var(--sand-50);border:1px solid var(--sand-300);border-radius:4px;display:flex;flex-direction:column;overflow:hidden">
-          <div style="position:relative;height:220px;border-bottom:1px solid var(--sand-300)">
-            <image-slot id="{{ f.slotId }}" shape="rect" fit="cover" placeholder="{{ f.slotHint }}"></image-slot>
-          </div>
-          <div style="padding:24px;display:flex;flex-direction:column;gap:14px;flex:1">
-            <div style="font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:.14em;color:var(--carbon-600)">{{ f.eyebrow }}</div>
-            <h3 style="font-family:var(--font-display,'Newsreader',Georgia,serif);font-weight:400;font-size:25px;line-height:1.2;letter-spacing:-.015em;margin:0;color:var(--carbon-900)">{{ f.nombre }}</h3>
-            <p style="margin:0;font-size:15px;color:var(--carbon-700);line-height:1.6">{{ f.cuerpo }}</p>
-            <ul style="list-style:none;margin:4px 0 0;padding:0;display:flex;flex-direction:column;gap:8px;font-size:15px;color:var(--carbon-800)">
-              <sc-for list="{{ f.activos }}" as="a" hint-placeholder-count="3">
-                <li style="display:flex;gap:10px;align-items:baseline">
-                  <span style="width:4px;height:4px;border-radius:50%;background:var(--ember-500);flex:none;transform:translateY(-3px)"></span>
-                  <span>{{ a }}</span>
-                </li>
-              </sc-for>
-            </ul>
-            <div style="margin-top:auto;padding-top:20px;border-top:1px solid var(--sand-300);display:flex;align-items:center;justify-content:space-between;gap:12px">
-              <span style="font-family:var(--font-display,'Newsreader',Georgia,serif);font-size:25px;color:var(--carbon-900)">{{ f.precio }}</span>
-              <x-import component-from-global-scope="VestaDesignSystem_e6d2b4.Button" size="sm" variant="secondary" hint-size="130px,36px">Ver la ficha</x-import>
-            </div>
-          </div>
-        </article>
-      </sc-for>
-    </div>
-  </section>
+<section class="reviews" aria-label="Testimonios">
+  <div class="wrap"><h2>Lo que dicen <em>ellas</em></h2></div>
+  <div class="track" id="track" tabindex="0">
+    <article class="rev"><div class="q" aria-hidden="true">“</div><h3>Por fin dormí de corrido</h3><blockquote>Llevaba dos años durmiendo por tramos de hora y media. En la tercera semana dormí seis horas seguidas.</blockquote><div class="who"><img src="assets/img/frasco-1.jpg" alt="" loading="lazy"><span>Marcela R. · 52 años · Medellín</span></div></article>
+    <article class="rev"><div class="q" aria-hidden="true">“</div><h3>Pude comparar la dosis</h3><blockquote>Lo que me convenció fue poder comparar la dosis con el estudio. Nadie más me había dejado hacer eso.</blockquote><div class="who"><img src="assets/img/frasco-2.jpg" alt="" loading="lazy"><span>Luz Elena P. · 57 años · Bogotá</span></div></article>
+    <article class="rev"><div class="q" aria-hidden="true">“</div><h3>Honestos desde el principio</h3><blockquote>Los sofocos no desaparecieron, bajaron. Me alivió que me lo dijeran así desde el principio.</blockquote><div class="who"><img src="assets/img/frasco-3.jpg" alt="" loading="lazy"><span>Gloria C. · 49 años · Cali</span></div></article>
+  </div>
+  <div class="car-nav"><button class="arr" type="button" data-go="-1" aria-label="Testimonio anterior">‹</button><div class="dots" id="dots" aria-hidden="true"><i class="on"></i><i></i><i></i></div><button class="arr" type="button" data-go="1" aria-label="Testimonio siguiente">›</button></div>
+</section>
 
-  <section id="ciencia" style="background:var(--carbon-900);color:var(--sand-100)">
-    <div style="max-width:1240px;margin:0 auto;padding:96px 24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:64px">
-      <div>
-        <div style="font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:.14em;color:var(--gold-400);margin-bottom:14px">Respaldo científico</div>
-        <div style="height:1px;background:var(--carbon-700);margin-bottom:28px"></div>
-        <h2 style="font-family:var(--font-display,'Newsreader',Georgia,serif);font-weight:400;font-size:clamp(32px,3.4vw,42px);line-height:1.15;letter-spacing:-.015em;margin:0 0 24px;color:var(--sand-50)">Publicamos también los resultados que no nos favorecen</h2>
-        <p style="margin:0 0 20px;color:var(--sand-100);max-width:58ch">Durante la transición, el rango termoneutral —la franja en la que el cuerpo no necesita hacer nada para regular su temperatura— se estrecha. De ahí los sofocos nocturnos y los despertares. Nuestras fórmulas trabajan sobre ese mecanismo, no sobre la sensación.</p>
-        <p style="margin:0 0 32px;color:var(--sand-400);max-width:58ch;font-size:15px">Esto no le funciona a todo el mundo. Los primeros efectos aparecen entre la segunda y la cuarta semana, y cada afirmación de esta página tiene su fuente a un clic.</p>
-        <x-import component-from-global-scope="VestaDesignSystem_e6d2b4.Button" variant="inverse" hint-size="200px,44px">Leer el protocolo completo</x-import>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:1px;background:var(--carbon-700);border:1px solid var(--carbon-700)">
-        <sc-for list="{{ datos }}" as="d" hint-placeholder-count="3">
-          <div style="background:var(--carbon-900);padding:28px 24px">
-            <div style="font-family:var(--font-display,'Newsreader',Georgia,serif);font-size:42px;line-height:1.05;color:var(--sand-50);margin-bottom:8px">{{ d.cifra }}</div>
-            <div style="font-size:15px;color:var(--sand-100);margin-bottom:6px">{{ d.texto }}</div>
-            <div style="font-size:13px;color:var(--sand-400)">{{ d.fuente }}</div>
-          </div>
-        </sc-for>
-      </div>
+<section id="suscripciones">
+  <div class="wrap">
+    <span class="eyebrow" style="text-align:center">Precios y suscripción</span>
+    <h2>La suscripción existe porque el efecto es <em>acumulativo</em></h2>
+    <p class="lead">Se pausa o se cancela desde tu cuenta, sin llamar a nadie. Puedes mover la fecha de envío cuando quieras.</p>
+    <div class="plans">
+      <div class="plan"><small>Sin compromiso</small><h3>Compra única</h3><div class="p">$169.000 <span>/ frasco</span></div><p>Un frasco de 60 gomas, 30 días de tratamiento. Para probar una fórmula antes de decidir.</p><a class="pill" href="mailto:hola@avivar.co?subject=Quiero%20comprar%20un%20frasco">Comprar un frasco</a></div>
+      <div class="plan hot"><small>La más elegida</small><h3>Suscripción mensual</h3><div class="p">$139.000 <span>/ mes</span></div><p>La misma fórmula cada 30 días con 18% de descuento, envío incluido y consulta de seguimiento al mes tres.</p><a class="pill" href="mailto:hola@avivar.co?subject=Quiero%20la%20suscripci%C3%B3n%20mensual">Empezar la suscripción</a></div>
+      <div class="plan"><small>Protocolo completo</small><h3>Las tres fórmulas</h3><div class="p">$379.000 <span>/ mes</span></div><p>Regulación, Termorregulación y Base diaria en un solo envío, con el calendario de tomas impreso.</p><a class="pill" href="mailto:hola@avivar.co?subject=Quiero%20el%20protocolo%20completo">Ver el protocolo</a></div>
     </div>
-  </section>
+    <p class="note">Precios en pesos colombianos. El envío es gratuito desde $200.000.</p>
+  </div>
+</section>
 
-  <section style="max-width:1240px;margin:0 auto;padding:96px 24px">
-    <div style="font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:.14em;color:var(--carbon-600);margin-bottom:14px">Testimonios</div>
-    <div style="height:1px;background:var(--sand-300);margin-bottom:56px"></div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:40px">
-      <sc-for list="{{ testimonios }}" as="t" hint-placeholder-count="3">
-        <blockquote style="margin:0;padding-left:24px;border-left:2px solid var(--ember-500)">
-          <p style="font-family:var(--font-display,'Newsreader',Georgia,serif);font-size:25px;line-height:1.3;letter-spacing:-.015em;margin:0 0 20px;color:var(--carbon-900);text-wrap:pretty">{{ t.cita }}</p>
-          <footer style="font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--carbon-600)">{{ t.autora }}</footer>
-        </blockquote>
-      </sc-for>
+<section class="faq-sec" id="preguntas">
+  <div class="wrap">
+    <span class="eyebrow" style="text-align:center">Preguntas frecuentes</span>
+    <h2>Lo que nos preguntan <em>antes de empezar</em></h2>
+    <div class="faq">
+      <details open><summary>¿En cuánto tiempo se nota algo?</summary><p>Los primeros efectos aparecen entre la segunda y la cuarta semana. El sueño suele ser lo primero que cambia; la frecuencia de los sofocos toma más tiempo.</p></details>
+      <details><summary>¿Puedo tomarlo con terapia hormonal?</summary><p>En la mayoría de los casos sí, pero depende de tu esquema. Muéstrale la etiqueta a tu médica antes de empezar: cada miligramo está declarado ahí.</p></details>
+      <details><summary>¿Qué pasa si no me funciona?</summary><p>Esto no le funciona a todo el mundo. Tienes 60 días desde la primera entrega para devolver el pedido, incluso abierto, y te reembolsamos el valor completo.</p></details>
+      <details><summary>¿Por qué no hay mezclas propietarias?</summary><p>Porque una mezcla propietaria esconde la dosis. Si no puedes comparar nuestro miligramaje con el del estudio, la etiqueta no te sirve para decidir.</p></details>
+      <details><summary>¿Cómo pauso la suscripción?</summary><p>Desde tu cuenta, en un clic, sin llamar a nadie. También puedes mover la fecha de envío tantas veces como necesites.</p></details>
     </div>
-  </section>
+    <p class="faq-mail">Si tu duda no está acá, escríbenos a <a href="mailto:hola@avivar.co">hola@avivar.co</a>. Responde el equipo, no un bot.</p>
+  </div>
+</section>
 
-  <section id="suscripciones" style="background:var(--sand-50);border-top:1px solid var(--sand-300);border-bottom:1px solid var(--sand-300)">
-    <div style="max-width:1240px;margin:0 auto;padding:96px 24px">
-      <div style="max-width:680px;margin-bottom:56px">
-        <div style="font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:.14em;color:var(--carbon-600);margin-bottom:14px">Precios y suscripción</div>
-        <div style="height:1px;background:var(--sand-300);margin-bottom:28px"></div>
-        <h2 style="font-family:var(--font-display,'Newsreader',Georgia,serif);font-weight:400;font-size:clamp(32px,3.4vw,42px);line-height:1.15;letter-spacing:-.015em;margin:0 0 16px;color:var(--carbon-900)">La suscripción existe porque el efecto es acumulativo</h2>
-        <p style="margin:0;color:var(--carbon-700)">Se pausa o se cancela desde tu cuenta, sin llamar a nadie. Puedes mover la fecha de envío cuando quieras.</p>
-      </div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:24px;align-items:start">
-        <sc-for list="{{ planes }}" as="p" hint-placeholder-count="3">
-          <div style="background:{{ p.bg }};border:1px solid {{ p.borde }};border-radius:4px;padding:24px;display:flex;flex-direction:column;gap:16px;min-height:340px">
-            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
-              <span style="font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:.14em;color:var(--carbon-600)">{{ p.eyebrow }}</span>
-              <sc-if value="{{ p.destacado }}" hint-placeholder-val="{{ false }}">
-                <x-import component-from-global-scope="VestaDesignSystem_e6d2b4.Badge" tone="ember" hint-size="90px,22px">Recomendado</x-import>
-              </sc-if>
-            </div>
-            <h3 style="font-family:var(--font-display,'Newsreader',Georgia,serif);font-weight:400;font-size:32px;line-height:1.1;letter-spacing:-.015em;margin:0;color:var(--carbon-900)">{{ p.titulo }}</h3>
-            <div style="display:flex;align-items:baseline;gap:8px">
-              <span style="font-family:var(--font-display,'Newsreader',Georgia,serif);font-size:42px;line-height:1;color:var(--carbon-900)">{{ p.precio }}</span>
-              <span style="font-size:15px;color:var(--carbon-600)">{{ p.periodo }}</span>
-            </div>
-            <p style="margin:0;font-size:15px;color:var(--carbon-700);line-height:1.6">{{ p.detalle }}</p>
-            <div style="margin-top:auto">
-              <x-import component-from-global-scope="VestaDesignSystem_e6d2b4.Button" variant="{{ p.variante }}" full="{{ true }}" hint-size="100%,44px">{{ p.cta }}</x-import>
-            </div>
-          </div>
-        </sc-for>
-      </div>
-      <p style="margin:24px 0 0;font-size:13px;color:var(--carbon-600)">Precios en pesos colombianos. El envío es gratuito desde $200.000.</p>
-    </div>
-  </section>
-
-  <section style="max-width:1240px;margin:0 auto;padding:96px 24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:64px;align-items:start">
+<section id="nuestra-historia">
+  <div class="wrap story">
+    <div class="story-img"><img src="assets/img/video-poster.jpg" alt="Frasco de gomas CALOR de Avivar" loading="lazy"></div>
     <div>
-      <div style="font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:.14em;color:var(--carbon-600);margin-bottom:14px">Preguntas frecuentes</div>
-      <div style="height:1px;background:var(--sand-300);margin-bottom:28px"></div>
-      <h2 style="font-family:var(--font-display,'Newsreader',Georgia,serif);font-weight:400;font-size:clamp(32px,3.4vw,42px);line-height:1.15;letter-spacing:-.015em;margin:0 0 20px;color:var(--carbon-900)">Lo que nos preguntan antes de empezar</h2>
-      <p style="margin:0;color:var(--carbon-700);max-width:48ch">Si tu duda no está acá, escríbenos a <a href="mailto:hola@avivar.co">hola@avivar.co</a>. Responde el equipo, no un bot.</p>
+      <span class="eyebrow">Nuestra historia</span>
+      <h2>Nacimos de una consulta que <em>se repetía</em></h2>
+      <p>Avivar es un equipo colombiano de expertos en nutrición clínica y formulación. Empezamos porque las mujeres en su segunda juventud se enfrentaban con un dolor silencioso: «me dijeron que a mi edad es normal aguantar calores y sofocos».</p>
+      <p>Avivar llegó a acompañar a estas mujeres.</p>
     </div>
-    <div style="border-top:1px solid var(--sand-300)">
-      <sc-for list="{{ faqs }}" as="q" hint-placeholder-count="5">
-        <div style="border-bottom:1px solid var(--sand-300)">
-          <button type="button" sc-camel-on-click="{{ q.toggle }}" style="width:100%;background:none;border:none;padding:22px 0;display:flex;align-items:center;justify-content:space-between;gap:20px;text-align:left;cursor:pointer;font-family:inherit;font-size:17px;font-weight:500;color:var(--carbon-900)" style-hover="color:var(--ember-600)">
-            <span>{{ q.pregunta }}</span>
-            <x-import component-from-global-scope="VestaDesignSystem_e6d2b4.Icon" name="{{ q.icono }}" size="{{ 18 }}" color="var(--ember-500)" hint-size="18px,18px"></x-import>
-          </button>
-          <sc-if value="{{ q.abierta }}" hint-placeholder-val="{{ false }}">
-            <p style="margin:0;padding:0 0 22px;max-width:60ch;color:var(--carbon-700);font-size:15px;line-height:1.65">{{ q.respuesta }}</p>
-          </sc-if>
-        </div>
-      </sc-for>
-    </div>
-  </section>
+  </div>
+</section>
 
-  <section id="nuestra-historia" style="background:var(--ember-500);color:var(--sand-50)">
-    <div style="max-width:1240px;margin:0 auto;padding:96px 24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:64px;align-items:center">
-      <div style="position:relative;min-height:420px">
-        <image-slot id="nuestra-historia-equipo" shape="rect" fit="cover" placeholder="Manos y textura · producto sobre barro o madera · luz natural cálida · recorte 4/3"></image-slot>
-      </div>
-      <div>
-        <div style="font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:.14em;color:var(--sand-100);margin-bottom:14px">Nuestra historia</div>
-        <div style="height:1px;background:var(--ember-300);margin-bottom:28px"></div>
-        <h2 style="font-family:var(--font-display,'Newsreader',Georgia,serif);font-weight:400;font-size:clamp(32px,3.4vw,42px);line-height:1.15;letter-spacing:-.015em;margin:0 0 24px;color:var(--sand-50)">Nacimos de una consulta que se repetía</h2>
-        <p style="margin:0 0 20px;color:var(--sand-100);max-width:54ch">Avivar es un equipo colombiano de expertos en nutrición clínica y formulación. Empezamos porque las mujeres en su segunda juventud se enfrentaban con un dolor silencioso: «me dijeron que a mi edad es normal aguantar calores y sofocos».</p>
-        <p style="margin:0 0 32px;color:var(--sand-100);max-width:54ch">Avivar llego a acompañar a estas mujeres.</p>
-        <x-import component-from-global-scope="VestaDesignSystem_e6d2b4.Button" variant="inverse" hint-size="170px,44px">Conocer al equipo</x-import>
-      </div>
+<section class="touch" id="contacto">
+  <div class="wrap">
+    <h2>Mantente en <em>contacto</em></h2>
+    <p>Un artículo al mes sobre la fisiología de la transición, y primero que nadie nuestros lanzamientos.</p>
+    <a class="pill" href="mailto:hola@avivar.co?subject=Quiero%20recibir%20la%20revista">Quiero recibirla</a>
+    <div class="socials">
+      <a class="soc" href="https://www.instagram.com/avivarwellness" target="_blank" rel="noopener"><span class="ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></span><span>@avivarwellness</span></a>
+      <a class="soc" href="https://www.facebook.com/avivar" target="_blank" rel="noopener"><span class="ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 8.5V6.8c0-.8.2-1.3 1.4-1.3H17V2.3c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2H7.6v3.6h2.7V21H14v-9h2.7l.4-3.5H14z"/></svg></span><span>avivar</span></a>
+      <!-- TikTok: cuando tengas la cuenta, cambia href="#" por el enlace, quita la clase soc-off y el aria-disabled, y escribe tu @ -->
+      <a class="soc soc-off" href="#" aria-disabled="true"><span class="ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 5.8A4.3 4.3 0 0 1 15.5 3h-3.1v12.4a2.6 2.6 0 1 1-2.6-2.6c.3 0 .5 0 .8.1V9.7a5.7 5.7 0 1 0 4.9 5.7V9a7.3 7.3 0 0 0 4.3 1.4V7.3a4.3 4.3 0 0 1-3.2-1.5z"/></svg></span><span>@ próximamente</span></a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <footer style="background:var(--carbon-900);color:var(--sand-100)">
-    <div style="max-width:1240px;margin:0 auto;padding:72px 24px 32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:48px">
-      <div>
-        <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px"><img src="assets/img/logo-light.png" alt="" style="height:64px;width:auto;display:block"><span style="font-family:var(--font-display,'Newsreader',Georgia,serif);font-size:36px;line-height:1;letter-spacing:-.015em;color:var(--sand-50)">avivar</span></div>
-        <p style="margin:0;font-size:15px;color:var(--sand-400);max-width:34ch">El fuego que se cuida, no se apaga.</p>
-      </div>
-      <div>
-        <div style="font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:.14em;color:var(--gold-400);margin-bottom:18px">Fórmulas</div>
-        <div style="display:flex;flex-direction:column;gap:10px;font-size:15px">
-          <a href="#formulas" style="color:var(--sand-100)">Noche</a>
-          <a href="#formulas" style="color:var(--sand-100)">Termorregulación</a>
-          <a href="#formulas" style="color:var(--sand-100)">Base diaria</a>
-          <a href="#suscripciones" style="color:var(--sand-100)">Planes y suscripción</a>
-        </div>
-      </div>
-      <div>
-        <div style="font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:.14em;color:var(--gold-400);margin-bottom:18px">Avivar</div>
-        <div style="display:flex;flex-direction:column;gap:10px;font-size:15px">
-          <a href="#ciencia" style="color:var(--sand-100)">Respaldo científico</a>
-          <a href="#nuestra-historia" style="color:var(--sand-100)">Nuestra historia</a>
-          <a href="#" style="color:var(--sand-100)">Envíos y devoluciones</a>
-          <a href="mailto:hola@avivar.co" style="color:var(--sand-100)">hola@avivar.co</a>
-        </div>
-      </div>
-      <div>
-        <div style="font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:.14em;color:var(--gold-400);margin-bottom:18px">Recibe la revista</div>
-        <p style="margin:0 0 16px;font-size:15px;color:var(--sand-400)">Un artículo al mes sobre fisiología de la transición. Sin promociones.</p>
-        <x-import component-from-global-scope="VestaDesignSystem_e6d2b4.Button" variant="inverse" size="sm" hint-size="130px,36px">Enviármela</x-import>
-      </div>
-    </div>
-    <div style="max-width:1240px;margin:0 auto;padding:24px;border-top:1px solid var(--carbon-700);display:flex;flex-wrap:wrap;gap:12px 32px;justify-content:space-between;font-size:13px;color:var(--sand-400)">
-      <span>© 2026 Avivar S.A.S. · Bogotá, Colombia</span>
-      <span>Este contenido no reemplaza una consulta médica ni constituye un diagnóstico.</span>
-    </div>
-  </footer>
-</div>
-</x-dc>
+</main>
 
-<script>(function(){var r=window.__resources;if(!r)return;var m={plus:r.icPlus,minus:r.icMinus,play:r.icPlay};new MutationObserver(function(){document.querySelectorAll("[style*='lucide-static']").forEach(function(el){["maskImage","webkitMaskImage"].forEach(function(p){var v=el.style[p];if(!v)return;var k=(v.match(/icons\/([a-z-]+)\.svg/)||[])[1];if(k&&m[k])el.style[p]="url("+m[k]+")";});});}).observe(document.documentElement,{subtree:true,childList:true,attributes:true,attributeFilter:["style"]});})();</script>
-<script type="text/x-dc" data-dc-script="" data-props="{&quot;mostrarBarraConfianza&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Contenido&quot;},&quot;faqInicial&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:0,&quot;min&quot;:-1,&quot;max&quot;:4,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Contenido&quot;},&quot;videoSrc&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;assets/video/avivar.mp4&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Video&quot;}}">
-class Component extends DCLogic {
-  state = { faqAbierta: null, videoOk: null, heroFallo: false, menuAbierto: false };
-  toggleMenu = () => this.setState((s) => ({ menuAbierto: !s.menuAbierto }));
-  cerrarMenu = () => this.setState({ menuAbierto: false });
-  cerrarConEscape = (e) => { if (e.key === "Escape" && this.state.menuAbierto) this.cerrarMenu(); };
-  handleHeroError = () => this.setState({ heroFallo: true });
-  componentDidMount() { this.probarVideo(); document.addEventListener("keydown", this.cerrarConEscape); }
-  componentWillUnmount() { document.removeEventListener("keydown", this.cerrarConEscape); }
-  componentDidUpdate(prev) { if (prev.videoSrc !== this.props.videoSrc) this.probarVideo(); }
-  probarVideo() {
-    const src = this.props.videoSrc ?? ((window.__resources||{}).heroVideo || "assets/video/avivar.mp4");
-    const v = document.createElement("video");
-    v.preload = "metadata";
-    v.onloadedmetadata = () => this.setState({ videoOk: true });
-    v.onerror = () => this.setState({ videoOk: false });
-    v.src = src;
+<footer>
+  <div class="wrap">
+    <div class="foot-cols">
+      <details open><summary>Fórmulas</summary><a href="#formulas">Termorregulación</a><a href="#formulas">Regulación</a><a href="#formulas">Base diaria</a><a href="#suscripciones">Suscripciones</a></details>
+      <details><summary>Avivar</summary><a href="#ciencia">Formulación basada en ciencia</a><a href="#nuestra-historia">Nuestra historia</a><a href="#preguntas">Preguntas frecuentes</a></details>
+      <details><summary>Contacto</summary><a href="mailto:hola@avivar.co">hola@avivar.co</a><a href="https://www.instagram.com/avivarwellness" target="_blank" rel="noopener">Instagram</a><a href="https://www.facebook.com/avivar" target="_blank" rel="noopener">Facebook</a></details>
+    </div>
+    <div class="legal"><span>© 2026 Avivar S.A.S. · Bogotá, Colombia</span><span>Este contenido no reemplaza una consulta médica ni constituye un diagnóstico.</span></div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  // Menú de celular
+  var btn = document.querySelector('.burger'), menu = document.getElementById('menu');
+  function setMenu(open) {
+    menu.hidden = !open;
+    btn.setAttribute('aria-expanded', open);
+    btn.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+    btn.querySelector('.i-open').style.display = open ? 'none' : '';
+    btn.querySelector('.i-close').style.display = open ? '' : 'none';
   }
+  btn.addEventListener('click', function () { setMenu(menu.hidden); });
+  menu.addEventListener('click', function (e) { if (e.target.closest('a')) setMenu(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !menu.hidden) { setMenu(false); btn.focus(); } });
 
-  renderVals() {
-    const inicial = this.props.faqInicial ?? 0;
-    const abiertaAhora = this.state.faqAbierta === null ? inicial : this.state.faqAbierta;
-    const faqData = [
-      ["¿En cuánto tiempo se nota algo?", "Los primeros efectos aparecen entre la segunda y la cuarta semana. El sueño suele ser lo primero que cambia; la frecuencia de los sofocos toma más tiempo."],
-      ["¿Puedo tomarlo con terapia hormonal?", "En la mayoría de los casos sí, pero depende de tu esquema. Muéstrale la etiqueta a tu médica antes de empezar: cada miligramo está declarado ahí."],
-      ["¿Qué pasa si no me funciona?", "Esto no le funciona a todo el mundo. Tienes 60 días desde la primera entrega para devolver el pedido, incluso abierto, y te reembolsamos el valor completo."],
-      ["¿Por qué no hay mezclas propietarias?", "Porque una mezcla propietaria esconde la dosis. Si no puedes comparar nuestro miligramaje con el del estudio, la etiqueta no te sirve para decidir."],
-      ["¿Cómo pauso la suscripción?", "Desde tu cuenta, en un clic, sin llamar a nadie. También puedes mover la fecha de envío tantas veces como necesites."]
-    ];
-    return {
-      videoRef: this.videoRef || (this.videoRef = (el) => { if (!el) return; el.muted = true; el.defaultMuted = true; el.setAttribute("muted", ""); if (!el.__avErr) { el.__avErr = true; el.addEventListener("error", () => { if (el.closest("#inicio")) this.handleHeroError(); }, true); if (el.error && el.closest("#inicio")) this.handleHeroError(); } const p = el.play(); if (p && p.catch) p.catch(() => {}); }),
-      menuAbierto: this.state.menuAbierto,
-      menuCerrado: !this.state.menuAbierto,
-      menuLabel: this.state.menuAbierto ? "Cerrar menú" : "Abrir menú",
-      toggleMenu: this.toggleMenu,
-      cerrarMenu: this.cerrarMenu,
-      heroFallo: this.state.heroFallo,
-      heroOk: !this.state.heroFallo,
-      onHeroError: this.handleHeroError,
-      heroSrc: ((window.__resources||{}).heroVideo || "assets/video/avivar.mp4"),
-      mostrarBarraConfianza: this.props.mostrarBarraConfianza ?? true,
-      videoSrc: this.state.videoOk === false ? "" : (this.props.videoSrc ?? ((window.__resources||{}).heroVideo || "assets/video/avivar.mp4")),
-      hayVideo: this.state.videoOk === true,
-      sinVideo: this.state.videoOk !== true,
-      formulas: [
-        { slotId: "formula-noche", slotHint: "Detalle de producto sobre barro o madera · recorte 4/3", eyebrow: "Sofocos y sudoracion", nombre: "Regulación", cuerpo: "Trabaja sobre el rango termoneutral, la franja en la que el cuerpo no necesita regular su temperatura.",activos: ["Cimicifuga racemosa 40 mg", "Salvia officinalis 300 mg", "Vitamina E 15 mg"] , precio: "$149.000" },
-        { slotId: "formula-termo", slotHint: "Detalle de producto sobre barro o madera · recorte 4/3", eyebrow: "Sofocos y sudoración", nombre: "Termorregulación", cuerpo: "Trabaja sobre el rango termoneutral, la franja en la que el cuerpo no necesita regular su temperatura.", activos: ["Cimicifuga racemosa 40 mg", "Salvia officinalis 300 mg", "Vitamina E 15 mg"], precio: "$169.000" },
-        { slotId: "formula-base", slotHint: "Detalle de producto sobre barro o madera · recorte 4/3", eyebrow: "Hueso y energía", nombre: "Base diaria", cuerpo: "El piso nutricional de la transición: densidad ósea, energía y salud cardiovascular. Con la comida principal.", activos: ["Vitamina D3 2.000 UI", "Calcio citrato 600 mg", "Omega-3 EPA/DHA 1.000 mg"], precio: "$139.000" }
-      ],
-      datos: [
-        { cifra: "68%", texto: "reportó menos despertares nocturnos frente al 31% del grupo placebo.", fuente: "Ensayo aleatorizado, 312 mujeres, 12 semanas" },
-        { cifra: "2-4", texto: "semanas hasta los primeros efectos medibles en calidad de sueño.", fuente: "Seguimiento semanal por diario validado" },
-        { cifra: "100%", texto: "de los miligramos declarados en la etiqueta, sin mezclas propietarias.", fuente: "Certificado de análisis por lote, público" }
-      ],
-      testimonios: [
-        { cita: "«Llevaba dos años durmiendo por tramos de hora y media. En la tercera semana dormí seis horas seguidas.»", autora: "Marcela R. · 52 años · Medellín" },
-        { cita: "«Lo que me convenció fue poder comparar la dosis con el estudio. Nadie más me había dejado hacer eso.»", autora: "Luz Elena P. · 57 años · Bogotá" },
-        { cita: "«Los sofocos no desaparecieron, bajaron. Me alivió que me lo dijeran así desde el principio.»", autora: "Gloria C. · 49 años · Cali" }
-      ],
-      planes: [
-        { eyebrow: "Sin compromiso", titulo: "Compra única", precio: "$169.000", periodo: "/ frasco", detalle: "Un frasco de 60 cápsulas, 30 días de tratamiento. Para probar una fórmula antes de decidir.", cta: "Comprar un frasco", variante: "secondary", bg: "var(--sand-100)", borde: "var(--sand-300)", destacado: false },
-        { eyebrow: "La más elegida", titulo: "Suscripción mensual", precio: "$139.000", periodo: "/ mes", detalle: "La misma fórmula cada 30 días con 18% de descuento, envío incluido y consulta de seguimiento al mes tres.", cta: "Empezar la suscripción", variante: "primary", bg: "var(--ember-50)", borde: "var(--ember-200)", destacado: true },
-        { eyebrow: "Protocolo completo", titulo: "Las tres fórmulas", precio: "$379.000", periodo: "/ mes", detalle: "Noche, Termorregulación y Base diaria en un solo envío, con el calendario de tomas impreso.", cta: "Ver el protocolo", variante: "secondary", bg: "var(--sand-100)", borde: "var(--sand-300)", destacado: false }
-      ],
-      faqs: faqData.map(([pregunta, respuesta], i) => ({
-        pregunta,
-        respuesta,
-        abierta: abiertaAhora === i,
-        icono: abiertaAhora === i ? "minus" : "plus",
-        toggle: () => this.setState(() => ({ faqAbierta: abiertaAhora === i ? -1 : i }))
-      }))
-    };
+  // Carrusel de testimonios
+  var track = document.getElementById('track'), dots = document.getElementById('dots').children;
+  function current() {
+    var mid = track.scrollLeft + track.clientWidth / 2, best = 0, bestD = Infinity;
+    for (var i = 0; i < track.children.length; i++) {
+      var c = track.children[i], d = Math.abs(c.offsetLeft + c.offsetWidth / 2 - mid);
+      if (d < bestD) { bestD = d; best = i; }
+    }
+    return best;
   }
-}
+  document.querySelectorAll('[data-go]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var n = track.children.length, i = (current() + Number(b.dataset.go) + n) % n, c = track.children[i];
+      track.scrollTo({ left: c.offsetLeft - (track.clientWidth - c.offsetWidth) / 2, behavior: 'smooth' });
+    });
+  });
+  track.addEventListener('scroll', function () {
+    var i = current();
+    for (var k = 0; k < dots.length; k++) dots[k].className = k === i ? 'on' : '';
+  }, { passive: true });
+
+  // Pie de página: desplegable en celular, siempre abierto en computador
+  var wide = window.matchMedia('(min-width:900px)');
+  function syncFooter() { if (wide.matches) document.querySelectorAll('footer details').forEach(function (d) { d.open = true; }); }
+  syncFooter();
+  if (wide.addEventListener) wide.addEventListener('change', syncFooter);
+
+  // Sin animaciones para quien lo pidió en su sistema
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('video').forEach(function (v) { v.removeAttribute('autoplay'); v.pause(); });
+  }
+})();
 </script>
-
-
-</body></html>
+</body>
+</html>
