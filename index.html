@@ -114,19 +114,11 @@ header{position:sticky;top:0;z-index:20;background:rgba(250,245,239,.94);-webkit
 /* Franja de video */
 .band{position:relative;height:clamp(320px,56vw,720px);background:var(--sand-200);overflow:hidden;padding:0}
 .band img{width:100%;height:100%;object-fit:cover;object-position:50% 56%}
-@media (min-width:1300px){.band{max-width:1200px;height:680px;margin:0 auto 64px;border-radius:24px}}
+@media (min-width:1300px){.band{max-width:1200px;height:680px;margin:0 auto;border-radius:24px}}
 .band .cap{position:absolute;inset:auto 0 0 0;padding:28px 20px;background:linear-gradient(to top,rgba(43,35,32,.85),transparent);color:var(--sand-50)}
 .band .cap p{font-family:var(--serif);font-size:clamp(28px,4vw,42px);line-height:1.15;max-width:1200px;margin:0 auto}
 
 /* Formulación basada en ciencia */
-.science{padding-top:0}
-.science-photo{position:relative;height:clamp(260px,50vw,480px);background:var(--sand-200);border-bottom:1px solid var(--sand-300)}
-/* La foto se recorta arriba para que no se vea la etiqueta del frasco */
-.science-photo>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 15%}
-@media (min-width:1300px){.science-photo{max-width:1200px;margin:0 auto;background:none;border:0}.science-photo>img{border-radius:0 0 24px 24px}}
-.science-dot{position:absolute;right:20px;bottom:-56px;width:120px;height:120px;border-radius:50%;overflow:hidden;box-shadow:0 12px 30px -10px rgba(43,35,32,.5);border:4px solid var(--sand-50)}
-.science-dot img{width:100%;height:100%;object-fit:cover}
-.science .wrap{padding-top:56px}
 .science h2{text-align:left;max-width:16ch}
 .science .lead{text-align:left;margin-left:0}
 .stats{display:grid;gap:14px;margin-top:32px}
@@ -326,10 +318,6 @@ footer details a:hover{color:var(--ember-600)}
 </section>
 
 <section class="science" id="ciencia">
-  <div class="science-photo">
-    <img src="assets/img/mujer-calor.jpg" alt="Mujer sonriendo mientras come una goma Avivar" loading="lazy">
-    <div class="science-dot"><img src="assets/img/frasco-4.jpg" alt="" loading="lazy"></div>
-  </div>
   <div class="wrap">
     <span class="eyebrow">Formulación basada en ciencia</span>
     <h2>Formulada con <em>ciencia</em>, no con promesas</h2>
