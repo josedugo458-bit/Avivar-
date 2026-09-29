@@ -75,7 +75,10 @@ header{position:sticky;top:0;z-index:20;background:rgba(250,245,239,.94);-webkit
 .hero h1{font-size:clamp(44px,8vw,84px);line-height:1}
 .hero h1 span{display:block;font-weight:600}
 .hero h1 em{display:block;font-size:1.05em;color:var(--carbon-900)}
-.hero p{max-width:40ch;margin:18px auto 26px;color:var(--carbon-700);font-size:17px}
+.hero-intro{max-width:40ch;margin:18px auto 14px;color:var(--carbon-700);font-size:17px}
+.benefits{list-style:none;margin:0 auto 28px;padding:0;display:inline-flex;flex-direction:column;gap:12px;text-align:left}
+.benefits li{display:flex;align-items:center;gap:12px;font-size:17px;color:var(--carbon-800)}
+.benefits b{flex:none;width:30px;height:30px;border-radius:50%;background:var(--ember-500);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:16px;font-weight:600}
 .chips{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:22px}
 .chip{background:#fff;border:1px solid var(--sand-300);border-radius:999px;padding:7px 14px;font-size:13px;color:var(--carbon-800)}
 .chip b{color:var(--ember-600)}
@@ -89,18 +92,22 @@ header{position:sticky;top:0;z-index:20;background:rgba(250,245,239,.94);-webkit
 .need small{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;opacity:.85}
 .need strong{font-family:var(--serif);font-weight:500;font-size:clamp(22px,3vw,30px);line-height:1.05;margin:6px 0 16px}
 .need .arrow{font-family:var(--sans);font-weight:400}
+.need p{margin:-8px 0 18px;font-size:14px;line-height:1.4;opacity:.92;max-width:34ch}
 .need img{margin:auto auto -18px;width:82%;aspect-ratio:1/1;object-fit:cover;border-radius:14px 14px 0 0;box-shadow:0 -8px 30px rgba(0,0,0,.25);transition:transform .3s}
 .need:hover img{transform:translateY(-4px)}
 .n1{background:linear-gradient(160deg,var(--ember-400),var(--ember-600))}
 .n2{background:linear-gradient(160deg,#4A3A33,var(--carbon-900))}
 .n3{background:linear-gradient(160deg,var(--gold-300),var(--gold-400))}
-.need-wide{grid-column:1/-1;flex-direction:row;align-items:flex-start;gap:12px;min-height:190px}
-.need-wide .t{display:flex;flex-direction:column;flex:1}
-.need-wide img{width:46%;margin:0 0 -18px;align-self:flex-end}
+/* En celular cada beneficio ocupa todo el ancho: texto a la izquierda, foto a la derecha */
+@media (max-width:899px){
+  .needs{grid-template-columns:1fr}
+  .need{flex-direction:row;align-items:flex-start;gap:12px;min-height:190px}
+  .need .t{display:flex;flex-direction:column;flex:1}
+  .need img{width:40%;margin:0 0 -18px;align-self:flex-end}
+}
 @media (min-width:900px){
   .needs{grid-template-columns:repeat(3,1fr);gap:22px}
-  .need-wide{grid-column:auto;flex-direction:column}
-  .need-wide img{width:82%;margin:auto auto -18px;align-self:auto}
+  .need .t{display:flex;flex-direction:column}
 }
 .after{margin-top:32px}
 
@@ -134,46 +141,60 @@ header{position:sticky;top:0;z-index:20;background:rgba(250,245,239,.94);-webkit
   .stat .num{text-align:left}
 }
 
-/* Nuestras fórmulas */
+/* Nuestro producto */
 .products-sec{background:#fff}
-.products{display:grid;grid-template-columns:1fr;gap:14px;margin-top:32px}
-.prod{background:#fff;border-radius:16px;overflow:hidden;display:flex;flex-direction:column;border:1px solid var(--sand-200)}
+.product{max-width:1000px;margin:32px auto 0;background:#fff;border:1px solid var(--sand-200);border-radius:20px;overflow:hidden;display:grid}
 .prod-img{position:relative;background:var(--sand-100);aspect-ratio:1/1;overflow:hidden}
 .prod-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.slot{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--carbon-600);font-size:12px;text-align:center;line-height:1.3;border:1.5px dashed var(--sand-300);border-radius:12px;margin:10px;background:var(--sand-50)}
-.badge{position:absolute;z-index:1;top:10px;left:10px;background:var(--gold-100);color:var(--carbon-900);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:5px 9px;border-radius:6px}
-.prod-body{padding:14px;display:flex;flex-direction:column;gap:6px;flex:1}
-.prod-body .tag{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ember-600);font-weight:600}
-.prod-body h3{font-size:22px;line-height:1.1}
-.prod-body ul{margin:2px 0 0;padding:0;list-style:none;font-size:13px;color:var(--carbon-700);line-height:1.45}
-.price{font-weight:700;font-size:20px;margin-top:auto;padding-top:6px}
-.price small{display:block;font-weight:500;font-size:12px;color:var(--ember-600)}
-.btn-sm{display:flex;align-items:center;justify-content:center;min-height:44px;border-radius:999px;background:var(--ember-500);color:#fff;font-weight:600;font-size:13px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;margin-top:8px}
+.slot{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--carbon-600);font-size:13px;text-align:center;line-height:1.3;border:1.5px dashed var(--sand-300);border-radius:14px;margin:14px;background:var(--sand-50)}
+.badge{position:absolute;z-index:1;top:14px;left:14px;background:var(--gold-100);color:var(--carbon-900);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:6px 10px;border-radius:6px}
+.prod-body{padding:24px 22px 26px;display:flex;flex-direction:column;gap:8px}
+.prod-body .tag{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ember-600);font-weight:600}
+.prod-body h3{font-size:34px;line-height:1.05}
+.prod-body .sub{margin:0;font-family:var(--serif);font-style:italic;font-size:19px;color:var(--carbon-700)}
+.prod-body ul{margin:6px 0 4px;padding:0;list-style:none;font-size:15px;color:var(--carbon-700);line-height:1.45;display:grid;gap:6px}
+.prod-body li{display:flex;gap:8px}
+.prod-body li::before{content:'✓';color:var(--ember-500);font-weight:700}
+.sub-line{margin:10px 0 0;font-size:15px;color:var(--carbon-700)}
+.price{margin:0;font-size:26px;font-weight:700}
+.price s{font-weight:400;font-size:18px;color:var(--carbon-600);margin-right:6px}
+.price small{font-size:16px;font-weight:600}
+.btn-sm{display:flex;align-items:center;justify-content:center;min-height:52px;border-radius:999px;background:var(--ember-500);color:#fff;font-weight:600;font-size:15px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;margin-top:6px}
 .btn-sm:hover{background:var(--ember-600);color:#fff}
-.once{text-align:center;font-weight:600;font-size:14px;text-decoration:underline;text-underline-offset:3px;padding:8px 0 2px}
-@media (max-width:899px){
-  .prod{display:grid;grid-template-columns:40% 1fr}
-  .prod-img{aspect-ratio:auto;min-height:100%}
-  .prod-body h3{font-size:21px}
-}
-@media (min-width:900px){.products{grid-template-columns:repeat(3,1fr);gap:22px}}
+.once{text-align:center;font-weight:600;font-size:16px;text-decoration:underline;text-underline-offset:3px;padding:10px 0 0}
+.ship{margin:4px 0 0;text-align:center;font-size:13px;color:var(--carbon-600)}
+@media (min-width:760px){.product{grid-template-columns:1fr 1fr}.prod-img{aspect-ratio:auto;min-height:100%}.prod-body{padding:36px 34px}}
 
 /* Testimonios */
 .reviews{background:var(--sand-100)}
-.track{display:flex;gap:14px;margin-top:32px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:0 calc(50% - min(44vw,280px))}
+.car{position:relative;max-width:1200px;margin:32px auto 0}
+.track{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 20px;scrollbar-width:none;padding:0 20px 6px}
 .track::-webkit-scrollbar{display:none}
-.rev{flex:0 0 min(88vw,560px);scroll-snap-align:center;background:#fff;border-radius:18px;padding:28px 26px;display:flex;flex-direction:column;min-height:300px}
-.rev .q{font-family:var(--serif);font-size:56px;line-height:.6;color:var(--ember-400);height:28px}
-.rev h3{font-family:var(--sans);font-weight:700;font-size:21px;letter-spacing:0;margin-top:6px}
-.rev blockquote{font-family:var(--serif);font-size:19px;line-height:1.45;color:var(--carbon-800);margin:10px 0 18px}
-.rev .who{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:14px;color:var(--carbon-700)}
-.rev .who img{width:56px;height:56px;border-radius:10px;object-fit:cover}
+.rev{flex:0 0 86%;scroll-snap-align:start;background:#fff;border-radius:18px;padding:26px 24px;display:flex;flex-direction:column;min-height:320px}
+.rev-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.rev h3{font-family:var(--sans);font-weight:700;font-size:20px;letter-spacing:0;line-height:1.2}
+.stars{flex:none;color:var(--carbon-900);font-size:17px;letter-spacing:1px;line-height:1.2}
+.rev blockquote{font-family:var(--serif);font-size:19px;line-height:1.45;color:var(--carbon-800);margin:14px 0 22px}
+.who{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.who-photo{flex:none;width:64px;height:64px;border-radius:50%;object-fit:cover}
+div.who-photo{display:flex;align-items:center;justify-content:center;border:1.5px dashed var(--sand-300);background:var(--sand-50);color:var(--carbon-600);font-size:11px}
+.who-name{text-align:right;font-family:var(--serif);font-size:18px;color:var(--carbon-900);line-height:1.25}
+.who-name small{display:block;font-family:var(--sans);font-size:12px;color:var(--carbon-600)}
 .car-nav{display:flex;justify-content:center;align-items:center;gap:18px;margin-top:20px}
-.arr{width:48px;height:48px;border-radius:50%;background:var(--ember-500);color:#fff;border:0;font-size:24px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px -6px rgba(43,35,32,.5)}
+.car-nav[hidden]{display:none}
+.arr{flex:none;width:48px;height:48px;border-radius:50%;background:var(--ember-500);color:#fff;border:0;font-size:26px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px -6px rgba(43,35,32,.5)}
 .arr:hover{background:var(--ember-600)}
 .dots{display:flex;gap:10px}
 .dots i{width:12px;height:12px;border-radius:50%;border:1.5px solid var(--sand-300);background:#fff}
 .dots i.on{background:var(--sand-300)}
+@media (min-width:900px){
+  .car{padding:0 64px}
+  .track{padding:0 0 6px;scroll-padding:0}
+  .rev{flex-basis:calc((100% - 32px)/3)}
+  .car-nav .arr{position:absolute;top:calc(50% - 50px)}
+  .car-nav .arr.prev{left:8px}
+  .car-nav .arr.next{right:8px}
+}
 
 /* Suscripciones */
 .plans{display:grid;gap:14px;margin-top:32px}
@@ -188,7 +209,7 @@ header{position:sticky;top:0;z-index:20;background:rgba(250,245,239,.94);-webkit
 .plan:not(.hot) .pill{background:transparent;color:var(--carbon-900);border:1.5px solid var(--carbon-900)}
 .plan:not(.hot) .pill:hover{background:var(--carbon-900);color:#fff}
 .note{text-align:center;font-size:14px;color:var(--carbon-600);margin:20px 0 0}
-@media (min-width:900px){.plans{grid-template-columns:repeat(3,1fr);align-items:start}}
+@media (min-width:760px){.plans{grid-template-columns:1fr 1fr;align-items:start;max-width:820px;margin-left:auto;margin-right:auto}}
 
 /* Preguntas frecuentes */
 .faq-sec{background:#fff}
@@ -240,7 +261,7 @@ footer details a:hover{color:var(--ember-600)}
 </head>
 <body>
 
-<div class="promo">ENVÍO <b>GRATIS</b> A TODA COLOMBIA · Suscríbete y ahorra <b>18%</b> <a href="#formulas">Comprar ›</a></div>
+<div class="promo">ENVÍO <b>GRATIS</b> A TODA COLOMBIA · Suscríbete por <b>$89.900</b> al mes <a href="#producto">Comprar ›</a></div>
 
 <header>
   <div class="wrap hdr">
@@ -250,19 +271,19 @@ footer details a:hover{color:var(--ember-600)}
     </button>
     <a class="logo" href="#inicio"><img src="assets/img/logo.png" alt="" width="23" height="36">avivar</a>
     <nav class="nav" aria-label="Principal">
-      <a href="#necesidad">Fórmulas</a>
+      <a href="#necesidad">Beneficios</a>
       <a href="#ciencia">Ciencia</a>
       <a href="#suscripciones">Suscripciones</a>
       <a href="#nuestra-historia">Nuestra historia</a>
     </nav>
-    <a class="bag" href="#formulas" aria-label="Comprar"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="bag-txt">Comprar</span></a>
+    <a class="bag" href="#producto" aria-label="Comprar"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="bag-txt">Comprar</span></a>
   </div>
   <nav class="menu" id="menu" aria-label="Menú principal" hidden>
-    <a href="#necesidad">Fórmulas</a>
+    <a href="#necesidad">Beneficios</a>
     <a href="#ciencia">Ciencia</a>
     <a href="#suscripciones">Suscripciones</a>
     <a href="#nuestra-historia">Nuestra historia</a>
-    <a class="pill" href="#formulas">Comprar</a>
+    <a class="pill" href="#producto">Comprar</a>
   </nav>
 </header>
 
@@ -272,8 +293,13 @@ footer details a:hover{color:var(--ember-600)}
   <div class="wrap">
     <span class="eyebrow">Tú eres tu bienestar</span>
     <h1><span>El fuego que se cuida,</span><em>no se apaga</em></h1>
-    <p>Te acompañamos en tu segunda juventud: menos calores y sofocos, tu sistema hormonal en equilibrio y más bienestar.</p>
-    <a class="pill" href="#formulas">Comprar</a>
+    <p class="hero-intro">Te acompañamos en tu segunda juventud. Contribuimos a:</p>
+    <ol class="benefits">
+      <li><b>1</b>Reducir calores y sofocos</li>
+      <li><b>2</b>Regular tu sistema hormonal</li>
+      <li><b>3</b>Maximizar tu bienestar</li>
+    </ol>
+    <a class="pill" href="#producto">Comprar</a>
     <div class="chips"><span class="chip"><b>+300</b> mujeres confían en nosotros</span><span class="chip"><b>Gratis</b> envío nacional</span></div>
     <div class="hero-media"><video src="assets/video/avivar.mp4" poster="assets/img/video-poster.jpg" autoplay muted loop playsinline preload="auto" aria-label="Frasco de gomas CALOR de Avivar"></video></div>
   </div>
@@ -283,13 +309,13 @@ footer details a:hover{color:var(--ember-600)}
   <div class="wrap">
     <span class="eyebrow" style="text-align:center">Formulación consciente, bienestar garantizado</span>
     <h2>¿Cómo te <em>ayudamos</em>?</h2>
-    <p class="lead">Una fórmula para cada síntoma de la transición hormonal, con la dosis de los estudios.</p>
+    <p class="lead">Una sola goma, tres beneficios para tu transición hormonal.</p>
     <div class="needs">
-      <a class="need n1" href="#formulas"><small>Sofocos y sudoración</small><strong>Termo&shy;rregulación <span class="arrow">→</span></strong><img src="assets/img/frasco-1.jpg" alt="" loading="lazy"></a>
-      <a class="need n2" href="#formulas"><small>Sofocos y sudoración</small><strong>Regulación <span class="arrow">→</span></strong><img src="assets/img/frasco-2.jpg" alt="" loading="lazy"></a>
-      <a class="need n3 need-wide" href="#formulas"><span class="t"><small>Hueso y energía</small><strong>Base diaria <span class="arrow">→</span></strong></span><img src="assets/img/frasco-3.jpg" alt="" loading="lazy"></a>
+      <a class="need n1" href="#producto"><span class="t"><small>Calores y sofocos</small><strong>Menos calores y sofocos <span class="arrow">→</span></strong><p>Trabaja sobre el rango termoneutral, la franja en la que el cuerpo no necesita regular su temperatura.</p></span><img src="assets/img/frasco-1.jpg" alt="" loading="lazy"></a>
+      <a class="need n2" href="#producto"><span class="t"><small>Equilibrio hormonal</small><strong>Regula tu sistema hormonal <span class="arrow">→</span></strong><p>Acompaña a tu cuerpo durante la transición, con cada ingrediente en la dosis que usaron los estudios.</p></span><img src="assets/img/frasco-2.jpg" alt="" loading="lazy"></a>
+      <a class="need n3" href="#producto"><span class="t"><small>Energía y bienestar</small><strong>Más energía y bienestar <span class="arrow">→</span></strong><p>Contribuye a reducir el cansancio y la fatiga, y al mantenimiento de huesos normales.</p></span><img src="assets/img/frasco-3.jpg" alt="" loading="lazy"></a>
     </div>
-    <div class="after"><a class="pill" href="#formulas">Ver todas las fórmulas</a></div>
+    <div class="after"><a class="pill" href="#producto">Conoce CALOR</a></div>
   </div>
 </section>
 
@@ -306,7 +332,7 @@ footer details a:hover{color:var(--ember-600)}
   <div class="wrap">
     <span class="eyebrow">Formulación basada en ciencia</span>
     <h2>Formulada con <em>ciencia</em>, no con promesas</h2>
-    <p class="lead">Cada ingrediente está en la dosis que usaron los estudios y declarado miligramo a miligramo en la etiqueta. Nuestras fórmulas trabajan sobre el mecanismo de los sofocos, no sobre la sensación.</p>
+    <p class="lead">Cada ingrediente está en la dosis que usaron los estudios y declarado miligramo a miligramo en la etiqueta. Nuestra fórmula trabaja sobre el mecanismo de los sofocos, no sobre la sensación.</p>
     <div class="stats">
       <div class="stat"><div class="num">68%</div><div><h3>Menos despertares</h3><p>reportó menos despertares nocturnos frente al 31% del grupo placebo.</p><span class="src">Ensayo aleatorizado, 312 mujeres, 12 semanas</span></div></div>
       <div class="stat"><div class="num">2–4<small>semanas</small></div><div><h3>Efecto medible</h3><p>hasta los primeros efectos medibles en calidad de sueño.</p><span class="src">Seguimiento semanal por diario validado</span></div></div>
@@ -315,39 +341,52 @@ footer details a:hover{color:var(--ember-600)}
   </div>
 </section>
 
-<section class="products-sec" id="formulas">
+<section class="products-sec" id="producto">
   <div class="wrap">
-    <h2>Nuestras <em>fórmulas</em></h2>
-    <div class="products">
+    <h2>Nuestro <em>producto</em></h2>
+    <article class="product">
       <!--
-        FOTOS DE PRODUCTO: para poner la foto de cada fórmula, sube la imagen a assets/img/
-        (fondo claro, cuadrada) y reemplaza el bloque <div class="slot">…</div> de esa fórmula por:
-        <img src="assets/img/NOMBRE-DE-TU-FOTO.jpg" alt="Frasco de Termorregulación de Avivar">
+        FOTO DEL PRODUCTO: sube la foto a assets/img/ (fondo claro, cuadrada) y reemplaza
+        el bloque <div class="slot">…</div> por:
+        <img src="assets/img/NOMBRE-DE-TU-FOTO.jpg" alt="Frasco de gomas CALOR de Avivar">
       -->
-      <article class="prod">
-        <div class="prod-img"><span class="badge">Sofocos</span><div class="slot"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 17l-5-5-9 8"/></svg><span>Foto del producto</span></div></div>
-        <div class="prod-body"><span class="tag">Sofocos y sudoración</span><h3>Termorregulación</h3><ul><li>Cimicifuga racemosa 40 mg</li><li>Salvia officinalis 300 mg</li><li>Vitamina E 15 mg</li></ul><div class="price">$169.000<small>Ahorra 18% con suscripción</small></div><a class="btn-sm" href="#suscripciones">Suscribirme</a><a class="once" href="#suscripciones">Compra única</a></div>
-      </article>
-      <article class="prod">
-        <div class="prod-img"><span class="badge">Sofocos</span><div class="slot"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 17l-5-5-9 8"/></svg><span>Foto del producto</span></div></div>
-        <div class="prod-body"><span class="tag">Sofocos y sudoración</span><h3>Regulación</h3><ul><li>Cimicifuga racemosa 40 mg</li><li>Salvia officinalis 300 mg</li><li>Vitamina E 15 mg</li></ul><div class="price">$149.000<small>Ahorra 18% con suscripción</small></div><a class="btn-sm" href="#suscripciones">Suscribirme</a><a class="once" href="#suscripciones">Compra única</a></div>
-      </article>
-      <article class="prod">
-        <div class="prod-img"><span class="badge">Energía</span><div class="slot"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 17l-5-5-9 8"/></svg><span>Foto del producto</span></div></div>
-        <div class="prod-body"><span class="tag">Hueso y energía</span><h3>Base diaria</h3><ul><li>Vitamina D3 2.000 UI</li><li>Calcio citrato 600 mg</li><li>Omega-3 EPA/DHA 1.000 mg</li></ul><div class="price">$139.000<small>Ahorra 18% con suscripción</small></div><a class="btn-sm" href="#suscripciones">Suscribirme</a><a class="once" href="#suscripciones">Compra única</a></div>
-      </article>
-    </div>
+      <div class="prod-img"><span class="badge">60 gomas</span><div class="slot"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 17l-5-5-9 8"/></svg><span>Foto del producto</span></div></div>
+      <div class="prod-body">
+        <span class="tag">Gomas masticables · 60 unidades</span>
+        <h3>CALOR</h3>
+        <p class="sub">Gomas para acompañarte en tu propio calor</p>
+        <ul>
+          <li>Contribuye a reducir el cansancio y la fatiga</li>
+          <li>Función normal del sistema nervioso y muscular</li>
+          <li>Mantenimiento de huesos normales</li>
+          <li>Función normal del sistema inmune</li>
+        </ul>
+        <p class="sub-line">Suscripción mensual, envío incluido</p>
+        <p class="price"><s>$109.900</s>$89.900<small>/mes</small></p>
+        <a class="btn-sm" href="#suscripciones">Suscribirme</a>
+        <a class="once" href="#suscripciones">Compra única · $109.900</a>
+        <p class="ship">Envío gratis a toda Colombia en todas las compras.</p>
+      </div>
+    </article>
   </div>
 </section>
 
 <section class="reviews" aria-label="Testimonios">
   <div class="wrap"><h2>Lo que dicen <em>ellas</em></h2></div>
-  <div class="track" id="track" tabindex="0">
-    <article class="rev"><div class="q" aria-hidden="true">“</div><h3>Por fin dormí de corrido</h3><blockquote>Llevaba dos años durmiendo por tramos de hora y media. En la tercera semana dormí seis horas seguidas.</blockquote><div class="who"><img src="assets/img/frasco-1.jpg" alt="" loading="lazy"><span>Marcela R. · 52 años · Medellín</span></div></article>
-    <article class="rev"><div class="q" aria-hidden="true">“</div><h3>Pude comparar la dosis</h3><blockquote>Lo que me convenció fue poder comparar la dosis con el estudio. Nadie más me había dejado hacer eso.</blockquote><div class="who"><img src="assets/img/frasco-2.jpg" alt="" loading="lazy"><span>Luz Elena P. · 57 años · Bogotá</span></div></article>
-    <article class="rev"><div class="q" aria-hidden="true">“</div><h3>Honestos desde el principio</h3><blockquote>Los sofocos no desaparecieron, bajaron. Me alivió que me lo dijeran así desde el principio.</blockquote><div class="who"><img src="assets/img/frasco-3.jpg" alt="" loading="lazy"><span>Gloria C. · 49 años · Cali</span></div></article>
+  <div class="car">
+    <!--
+      FOTO DE CADA TESTIMONIO: sube la foto a assets/img/ y, en su tarjeta, reemplaza
+      <div class="who-photo" aria-hidden="true">Foto</div> por:
+      <img class="who-photo" src="assets/img/NOMBRE-DE-LA-FOTO.jpg" alt="Foto de Marcela R.">
+      Para agregar testimonios, copia un bloque <article class="rev">…</article> completo.
+    -->
+    <div class="track" id="track" tabindex="0">
+      <article class="rev"><div class="rev-top"><h3>Por fin dormí de corrido</h3><span class="stars" role="img" aria-label="5 de 5 estrellas">★★★★★</span></div><blockquote>Llevaba dos años durmiendo por tramos de hora y media. En la tercera semana dormí seis horas seguidas.</blockquote><div class="who"><div class="who-photo" aria-hidden="true">Foto</div><p class="who-name">Marcela R. ✓<small>52 años · Medellín</small></p></div></article>
+      <article class="rev"><div class="rev-top"><h3>Pude comparar la dosis</h3><span class="stars" role="img" aria-label="5 de 5 estrellas">★★★★★</span></div><blockquote>Lo que me convenció fue poder comparar la dosis con el estudio. Nadie más me había dejado hacer eso.</blockquote><div class="who"><div class="who-photo" aria-hidden="true">Foto</div><p class="who-name">Luz Elena P. ✓<small>57 años · Bogotá</small></p></div></article>
+      <article class="rev"><div class="rev-top"><h3>Honestos desde el principio</h3><span class="stars" role="img" aria-label="5 de 5 estrellas">★★★★★</span></div><blockquote>Los sofocos no desaparecieron, bajaron. Me alivió que me lo dijeran así desde el principio.</blockquote><div class="who"><div class="who-photo" aria-hidden="true">Foto</div><p class="who-name">Gloria C. ✓<small>49 años · Cali</small></p></div></article>
+    </div>
+    <div class="car-nav" id="car-nav"><button class="arr prev" type="button" data-go="-1" aria-label="Testimonio anterior">‹</button><div class="dots" id="dots" aria-hidden="true"></div><button class="arr next" type="button" data-go="1" aria-label="Testimonio siguiente">›</button></div>
   </div>
-  <div class="car-nav"><button class="arr" type="button" data-go="-1" aria-label="Testimonio anterior">‹</button><div class="dots" id="dots" aria-hidden="true"><i class="on"></i><i></i><i></i></div><button class="arr" type="button" data-go="1" aria-label="Testimonio siguiente">›</button></div>
 </section>
 
 <section id="suscripciones">
@@ -356,11 +395,10 @@ footer details a:hover{color:var(--ember-600)}
     <h2>La suscripción existe porque el efecto es <em>acumulativo</em></h2>
     <p class="lead">Se pausa o se cancela desde tu cuenta, sin llamar a nadie. Puedes mover la fecha de envío cuando quieras.</p>
     <div class="plans">
-      <div class="plan"><small>Sin compromiso</small><h3>Compra única</h3><div class="p">$169.000 <span>/ frasco</span></div><p>Un frasco de 60 gomas, 30 días de tratamiento. Para probar una fórmula antes de decidir.</p><a class="pill" href="mailto:hola@avivar.co?subject=Quiero%20comprar%20un%20frasco">Comprar un frasco</a></div>
-      <div class="plan hot"><small>La más elegida</small><h3>Suscripción mensual</h3><div class="p">$139.000 <span>/ mes</span></div><p>La misma fórmula cada 30 días con 18% de descuento, envío incluido y consulta de seguimiento al mes tres.</p><a class="pill" href="mailto:hola@avivar.co?subject=Quiero%20la%20suscripci%C3%B3n%20mensual">Empezar la suscripción</a></div>
-      <div class="plan"><small>Protocolo completo</small><h3>Las tres fórmulas</h3><div class="p">$379.000 <span>/ mes</span></div><p>Regulación, Termorregulación y Base diaria en un solo envío, con el calendario de tomas impreso.</p><a class="pill" href="mailto:hola@avivar.co?subject=Quiero%20el%20protocolo%20completo">Ver el protocolo</a></div>
+      <div class="plan"><small>Sin compromiso</small><h3>Compra única</h3><div class="p">$109.900 <span>/ frasco</span></div><p>Un frasco de 60 gomas, 30 días de tratamiento, con envío gratis. Para probar CALOR antes de decidir.</p><a class="pill" href="mailto:hola@avivar.co?subject=Quiero%20comprar%20un%20frasco">Comprar un frasco</a></div>
+      <div class="plan hot"><small>La más elegida</small><h3>Suscripción mensual</h3><div class="p">$89.900 <span>/ mes</span></div><p>El mismo frasco cada 30 días con 18% de descuento, envío gratis y consulta de seguimiento al mes tres.</p><a class="pill" href="mailto:hola@avivar.co?subject=Quiero%20la%20suscripci%C3%B3n%20mensual">Empezar la suscripción</a></div>
     </div>
-    <p class="note">Precios en pesos colombianos. El envío es gratuito desde $200.000.</p>
+    <p class="note">Precios en pesos colombianos. El envío es gratis a toda Colombia en todas las compras.</p>
   </div>
 </section>
 
@@ -410,7 +448,7 @@ footer details a:hover{color:var(--ember-600)}
 <footer>
   <div class="wrap">
     <div class="foot-cols">
-      <details open><summary>Fórmulas</summary><a href="#formulas">Termorregulación</a><a href="#formulas">Regulación</a><a href="#formulas">Base diaria</a><a href="#suscripciones">Suscripciones</a></details>
+      <details open><summary>Producto</summary><a href="#producto">CALOR</a><a href="#necesidad">Beneficios</a><a href="#suscripciones">Suscripciones</a></details>
       <details><summary>Avivar</summary><a href="#ciencia">Formulación basada en ciencia</a><a href="#nuestra-historia">Nuestra historia</a><a href="#preguntas">Preguntas frecuentes</a></details>
       <details><summary>Contacto</summary><a href="mailto:hola@avivar.co">hola@avivar.co</a><a href="https://www.instagram.com/avivarwellness" target="_blank" rel="noopener">Instagram</a><a href="https://www.facebook.com/avivar" target="_blank" rel="noopener">Facebook</a></details>
     </div>
@@ -433,26 +471,44 @@ footer details a:hover{color:var(--ember-600)}
   menu.addEventListener('click', function (e) { if (e.target.closest('a')) setMenu(false); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !menu.hidden) { setMenu(false); btn.focus(); } });
 
-  // Carrusel de testimonios
-  var track = document.getElementById('track'), dots = document.getElementById('dots').children;
+  // Carrusel de testimonios: los puntos se crean según la cantidad de tarjetas,
+  // y las flechas y puntos se ocultan cuando todas las tarjetas caben en pantalla
+  var track = document.getElementById('track'), nav = document.getElementById('car-nav'), dotsBox = document.getElementById('dots');
+  var cards = track.children, dots = dotsBox.children;
+  function perView() {
+    var step = cards.length > 1 ? cards[1].offsetLeft - cards[0].offsetLeft : track.clientWidth;
+    return Math.max(1, Math.round((track.clientWidth - pad()) / step));
+  }
+  function positions() { return Math.max(1, cards.length - perView() + 1); }
+  function pad() { return parseFloat(getComputedStyle(track).paddingLeft) || 0; }
   function current() {
-    var mid = track.scrollLeft + track.clientWidth / 2, best = 0, bestD = Infinity;
-    for (var i = 0; i < track.children.length; i++) {
-      var c = track.children[i], d = Math.abs(c.offsetLeft + c.offsetWidth / 2 - mid);
+    var best = 0, bestD = Infinity;
+    for (var i = 0; i < positions(); i++) {
+      var d = Math.abs(cards[i].offsetLeft - pad() - track.scrollLeft);
       if (d < bestD) { bestD = d; best = i; }
     }
     return best;
   }
-  document.querySelectorAll('[data-go]').forEach(function (b) {
-    b.addEventListener('click', function () {
-      var n = track.children.length, i = (current() + Number(b.dataset.go) + n) % n, c = track.children[i];
-      track.scrollTo({ left: c.offsetLeft - (track.clientWidth - c.offsetWidth) / 2, behavior: 'smooth' });
-    });
-  });
-  track.addEventListener('scroll', function () {
+  function paint() {
     var i = current();
     for (var k = 0; k < dots.length; k++) dots[k].className = k === i ? 'on' : '';
-  }, { passive: true });
+  }
+  function fit() {
+    nav.hidden = track.scrollWidth <= track.clientWidth + 2;
+    var n = positions();
+    while (dots.length < n) dotsBox.appendChild(document.createElement('i'));
+    while (dots.length > n) dotsBox.removeChild(dotsBox.lastChild);
+    paint();
+  }
+  document.querySelectorAll('[data-go]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var n = positions(), i = (current() + Number(b.dataset.go) + n) % n;
+      track.scrollTo({ left: Math.min(cards[i].offsetLeft - pad(), track.scrollWidth - track.clientWidth), behavior: 'smooth' });
+    });
+  });
+  track.addEventListener('scroll', paint, { passive: true });
+  window.addEventListener('resize', fit);
+  fit();
 
   // Pie de página: desplegable en celular, siempre abierto en computador
   var wide = window.matchMedia('(min-width:900px)');
