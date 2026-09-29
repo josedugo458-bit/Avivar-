@@ -112,8 +112,9 @@ header{position:sticky;top:0;z-index:20;background:rgba(250,245,239,.94);-webkit
 .after{margin-top:32px}
 
 /* Franja de video */
-.band{position:relative;height:clamp(300px,44vw,520px);background:#000;overflow:hidden;padding:0}
-.band video{width:100%;height:100%;object-fit:cover;opacity:.9}
+.band{position:relative;height:clamp(320px,56vw,720px);background:var(--sand-200);overflow:hidden;padding:0}
+.band img{width:100%;height:100%;object-fit:cover;object-position:50% 56%}
+@media (min-width:1300px){.band{max-width:1200px;height:680px;margin:0 auto 64px;border-radius:24px}}
 .band .cap{position:absolute;inset:auto 0 0 0;padding:28px 20px;background:linear-gradient(to top,rgba(43,35,32,.85),transparent);color:var(--sand-50)}
 .band .cap p{font-family:var(--serif);font-size:clamp(28px,4vw,42px);line-height:1.15;max-width:1200px;margin:0 auto}
 
@@ -319,8 +320,8 @@ footer details a:hover{color:var(--ember-600)}
   </div>
 </section>
 
-<section class="band" aria-label="Video de Avivar">
-  <video src="assets/video/avivar.mp4" poster="assets/img/video-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+<section class="band" aria-label="CALOR de Avivar">
+  <img src="assets/img/franja-calor.jpg" alt="Frasco de gomas CALOR de Avivar sobre una base de piedra" loading="lazy">
   <div class="cap"><p>El fuego que se cuida, no se apaga</p></div>
 </section>
 
