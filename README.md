@@ -6,6 +6,7 @@ Sitio estático de Avivar (avivar.com.co): una sola página en HTML, CSS y un po
 - `index.html`: toda la página. Los textos, precios, ingredientes, testimonios y preguntas frecuentes están escritos directamente en el HTML, así que se editan buscando el texto y cambiándolo.
 - `assets/img/`: logos, fotos de beneficios, producto, testimonios, franja e historia, y portada del video.
 - `assets/video/avivar.mp4`: video de la portada y de la franja de video (H.264, sin audio, optimizado para web). Para cambiarlo, reemplázalo por otro .mp4 con el mismo nombre.
+- `terminos.html`, `devoluciones.html`, `privacidad.html`: páginas legales, enlazadas en el pie de página (columna "Legal"). Usan los estilos de `assets/css/legal.css`. Los datos pendientes están resaltados en amarillo (`<mark>`).
 - `assets/fonts/`: tipografías Newsreader e Instrument Sans.
 
 Pendientes marcados en `index.html` con comentarios:
