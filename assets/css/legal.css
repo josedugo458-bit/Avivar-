@@ -1,0 +1,34 @@
+/* Estilos compartidos de las páginas legales (términos, devoluciones, datos personales) */
+@font-face{font-family:'Newsreader';font-style:normal;font-weight:300 600;font-display:swap;src:url(../fonts/newsreader-normal-latin.woff2) format('woff2')}
+@font-face{font-family:'Instrument Sans';font-style:normal;font-weight:400 700;font-display:swap;src:url(../fonts/instrument-sans-normal-latin.woff2) format('woff2')}
+:root{
+  --ember-50:#FBEEE7;--ember-500:#C1502E;--ember-600:#AA4527;
+  --sand-50:#FAF5EF;--sand-100:#F3E9DE;--sand-300:#DCC9B6;
+  --carbon-600:#6E625A;--carbon-800:#3D332E;--carbon-900:#2B2320;
+  --serif:'Newsreader',Georgia,serif;--sans:'Instrument Sans',system-ui,-apple-system,sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--sand-50);color:var(--carbon-900);font-family:var(--sans);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:var(--ember-600)}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px}
+header{border-bottom:1px solid var(--sand-300);background:var(--sand-50)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;max-width:1200px}
+.logo{display:flex;align-items:center;gap:8px;font-family:var(--serif);font-size:26px;color:var(--carbon-900);text-decoration:none}
+.back{font-size:15px;text-decoration:none;font-weight:600}
+main{padding:40px 0 64px}
+.draft{background:var(--ember-50);border:1px solid var(--ember-500);border-radius:12px;padding:12px 16px;font-size:14px;margin-bottom:28px}
+h1{font-family:var(--serif);font-weight:400;font-size:clamp(32px,6vw,44px);line-height:1.1;margin:0 0 8px}
+.updated{color:var(--carbon-600);font-size:14px;margin:0 0 32px}
+h2{font-family:var(--serif);font-weight:500;font-size:24px;line-height:1.25;margin:40px 0 8px}
+h3{font-size:17px;margin:24px 0 4px}
+p,li{color:var(--carbon-800)}
+ul,ol{padding-left:22px}
+li{margin:4px 0}
+mark{background:#F7E3A6;color:inherit;padding:0 3px;border-radius:3px}
+.box{background:var(--sand-100);border-radius:12px;padding:16px 20px;margin:16px 0}
+.box p{margin:4px 0}
+footer{background:var(--sand-100);padding:28px 0 40px;font-size:14px;color:var(--carbon-600)}
+footer nav{display:flex;flex-wrap:wrap;gap:8px 24px;margin-bottom:12px}
+footer a{color:var(--carbon-800);text-decoration:none}
+footer a:hover{color:var(--ember-600)}
+footer a[aria-current]{font-weight:700}
